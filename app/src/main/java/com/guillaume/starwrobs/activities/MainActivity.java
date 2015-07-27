@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.guillaume.starwrobs.R;
+import com.guillaume.starwrobs.data.controller.DataController;
 import com.guillaume.starwrobs.data.network.ApiManager;
 import com.guillaume.starwrobs.data.network.model.ResultPeople;
 import com.guillaume.starwrobs.fragments.DummyFragment;
@@ -61,13 +62,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_refresh:
-                subscribe(new ApiManager().fetchPeople(1).
-                        subscribe(new SimpleObserver<ResultPeople>() {
-                            @Override
-                            public void onNext(ResultPeople list) {
-                                Log.d("main", "[success] get people");
-                            }
-                        }));
+                DataController.refreshData();
 
                 return true;
         }
