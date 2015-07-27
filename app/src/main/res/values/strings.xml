@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">StarWrobs</string>
+    <string name="menu_refresh">Refresh data</string>
+    <string name="ui_tab_people">People</string>
+    <string name="ui_tab_films">Films</string>
+    <string name="ui_tab_planets">Planets</string>
+    <string name="ui_tab_species">Species</string>
+    <string name="ui_tab_starships">Starships</string>
+    <string name="ui_tab_vehicles">Vehicles</string>
+</resources>
