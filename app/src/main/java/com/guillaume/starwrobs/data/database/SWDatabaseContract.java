@@ -1,4 +1,4 @@
-package com.guillaume.starwrobs.data.data.database;
+package com.guillaume.starwrobs.data.database;
 
 
 import android.net.Uri;
@@ -24,14 +24,14 @@ public class SWDatabaseContract {
     /**
      * Common col
      */
-    interface CommonColumns {
+    public interface CommonColumns {
         String COMMON_ID = "id";
         String COMMON_CREATED = "created";
         String COMMON_EDITED = "edited";
     }
 
-    /* People have many FILMS, SPECIES, VEHICLES and STARSHIPS */
-    interface People {
+    /* PeopleTableMeta have many FILMS, SPECIES, VEHICLES and STARSHIPS */
+    public interface People {
         String PEOPLE_NAME = "people_name";
         String PEOPLE_HEIGHT = "people_height";
         String PEOPLE_MASS = "people_mass";
@@ -44,7 +44,7 @@ public class SWDatabaseContract {
     }
 
     /* A film has many PEOPLE, PLANETS, VEHICLES, SPECIES and STARSHIPS */
-    interface Film {
+    public interface Film {
         String FILM_TITLE = "film_title";
         String FILM_EPISODE_ID = "film_episode_id";
         String FILM_OPENING_CRAWL = "film_opening_crawl";
@@ -54,7 +54,7 @@ public class SWDatabaseContract {
     }
 
     /* A planet has many FILMS and PEOPLE */
-    interface Planet {
+    public interface Planet {
         String PLANET_NAME = "planet_name";
         String PLANET_DIAMETER = "planet_diameter";
         String PLANET_ROTATION_PERIOD = "planet_rotation_period";
@@ -66,8 +66,8 @@ public class SWDatabaseContract {
         String PLANET_SURFACE_WATER = "planet_surface_water";
     }
 
-    /* Species has many PEOPLE and FILMS */
-    interface Species {
+    /* Species have many PEOPLE and FILMS */
+    public interface Species {
         String SPECIES_NAME = "species_name";
         String SPECIES_CLASSIFICATION = "species_classification";
         String SPECIES_DESIGNATION = "species_designation";
@@ -81,12 +81,12 @@ public class SWDatabaseContract {
     }
 
     /* A starship has many FILMS, PEOPLE*/
-    interface Starship {
+    public interface Starship {
         String STARSHIP_HYPERDRIVE_RATING = "starship_hyperdrive_rating";
         String STARSHIP_MGLT = "starship_mglt";
     }
 
-    interface CommonStarshipVehicle {
+    public interface CommonStarshipVehicle {
         String STARSHIP_VEHICLE_NAME = "name";
         String STARSHIP_VEHICLE_MODEL = "model";
         String STARSHIP_VEHICLE_MANUFACTURER = "manufacturer";
@@ -100,54 +100,54 @@ public class SWDatabaseContract {
         String STARSHIP_VEHICLE_CLASS = "class";
     }
 
-    interface LinkPeopleFilms {
+    public interface LinkPeopleFilms {
         String PEOPLE_ID = "people_id";
         String FILM_ID = "film_id";
     }
 
-    interface LinkPeopleSpecies {
+    public interface LinkPeopleSpecies {
         String PEOPLE_ID = "people_id";
         String SPECIES_ID = "species_id";
     }
 
-    interface LinkPeopleStarships {
+    public interface LinkPeopleStarships {
         String PEOPLE_ID = "people_id";
         String STARSHIP_ID = "starship_id";
     }
 
-    interface LinkPeopleVehicles {
+    public interface LinkPeopleVehicles {
         String PEOPLE_ID = "people_id";
         String VEHICLE_ID = "vehicle_id";
     }
 
-    interface LinkFilmsPlanets {
+    public interface LinkFilmsPlanets {
         String FILM_ID = "film_id";
         String STARSHIPS_ID = "starships_id";
     }
 
-    interface LinkFilmsStarships {
+    public interface LinkFilmsStarships {
         String FILM_ID = "film_id";
         String STARSHIPS_ID = "starships_id";
     }
 
-    interface LinkFilmsSpecies {
+    public interface LinkFilmsSpecies {
         String FILM_ID = "film_id";
         String SPECIES_ID = "species_id";
     }
 
-    interface LinkFilmsVehicles {
+    public interface LinkFilmsVehicles {
         String FILM_ID = "film_id";
         String VEHICLES_ID = "vehicles_id";
     }
 
-    interface LinkPlanetsPeople {
+    public interface LinkPlanetsPeople {
         String PLANET_ID = "planet_id";
         String PEOPLE_ID = "people_id";
     }
 
 
 
-    interface Tables {
+    public interface Tables {
         String FILMS = "table_films";
         String PEOPLE = "table_people";
         String PLANETS = "table_planets";
@@ -156,7 +156,7 @@ public class SWDatabaseContract {
         String VEHICLES = "table_vehicles";
     }
 
-    interface LinkTables {
+    public interface LinkTables {
         String LINK_PEOPLE_FILMS = "table_link_people_films";
         String LINK_PEOPLE_SPECIES = "table_link_people_species";
         String LINK_PEOPLE_STARSHIPS = "table_link_people_starships";

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">StarWrobs</string>
+    <string name="app_name">Star Wrobs</string>
     <string name="menu_refresh">Refresh data</string>
     <string name="ui_tab_people">People</string>
     <string name="ui_tab_films">Films</string>

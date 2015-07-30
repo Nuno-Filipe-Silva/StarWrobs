@@ -2,21 +2,42 @@ package com.guillaume.starwrobs;
 
 
 import android.app.Application;
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import com.guillaume.starwrobs.data.database.DbModule;
 
 public class SWApplication extends Application {
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
+    @Nullable
+    private volatile AppComponent appComponent;
 
-        // Database setup
-
+    @NonNull
+    public static SWApplication get(@NonNull Context context) {
+        return (SWApplication) context.getApplicationContext();
     }
 
-    @Override
-    public void onTerminate() {
-        super.onTerminate();
+    @NonNull
+    public AppComponent appComponent() {
+        if (appComponent == null) {
+            synchronized (SWApplication.class) {
+                if (appComponent == null) {
+                    appComponent = createAppComponent();
+                }
+            }
+        }
 
-        // Close database
+        //noinspection ConstantConditions
+        return appComponent;
+    }
+
+    @NonNull
+    private AppComponent createAppComponent() {
+        return DaggerAppComponent
+                .builder()
+                .appModule(new AppModule(this))
+                .dbModule(new DbModule())
+                .build();
     }
 }

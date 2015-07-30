@@ -8,27 +8,18 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.guillaume.starwrobs.R;
 import com.guillaume.starwrobs.data.controller.DataController;
-import com.guillaume.starwrobs.data.network.ApiManager;
-import com.guillaume.starwrobs.data.network.model.ResultPeople;
 import com.guillaume.starwrobs.fragments.DummyFragment;
-import com.guillaume.starwrobs.util.SimpleObserver;
+import com.guillaume.starwrobs.fragments.SWListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Subscription;
-import rx.subscriptions.CompositeSubscription;
-
-
 public class MainActivity extends AppCompatActivity {
-
-    private CompositeSubscription subscriptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-
-
-        // Proper RxJava subscriptions management with CompositeSubscription
-        subscriptions = new CompositeSubscription();
     }
 
 
@@ -62,8 +49,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_refresh:
-                DataController.refreshData();
-
+                new DataController(getApplicationContext()).refreshData();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -71,12 +57,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new DummyFragment(), getString(R.string.ui_tab_people));
-        adapter.addFragment(new DummyFragment(), getString(R.string.ui_tab_films));
-        adapter.addFragment(new DummyFragment(), getString(R.string.ui_tab_planets));
-        adapter.addFragment(new DummyFragment(), getString(R.string.ui_tab_species));
-        adapter.addFragment(new DummyFragment(), getString(R.string.ui_tab_starships));
-        adapter.addFragment(new DummyFragment(), getString(R.string.ui_tab_vehicles));
+        adapter.addFragment(SWListFragment.newInstance(1), getString(R.string.ui_tab_people));
+        adapter.addFragment(SWListFragment.newInstance(1), getString(R.string.ui_tab_films));
+        adapter.addFragment(SWListFragment.newInstance(1), getString(R.string.ui_tab_planets));
+        adapter.addFragment(SWListFragment.newInstance(1), getString(R.string.ui_tab_species));
+        adapter.addFragment(SWListFragment.newInstance(1), getString(R.string.ui_tab_starships));
+        adapter.addFragment(SWListFragment.newInstance(1), getString(R.string.ui_tab_vehicles));
         viewPager.setAdapter(adapter);
     }
 
@@ -107,16 +93,5 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return mFragmentTitles.get(position);
         }
-    }
-
-    protected void subscribe(Subscription s) {
-        subscriptions.add(s);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        subscriptions.unsubscribe();
     }
 }
