@@ -90,6 +90,7 @@ public class DataController {
         values.put(SWDatabaseContract.People.PEOPLE_GENDER, people.gender);
         values.put(SWDatabaseContract.People.PEOPLE_HOMEWORLD, people.homeworld);
         mDatabase.insert(SWDatabaseContract.Tables.PEOPLE, null, values);
+        
 
         int nbOfFilms = people.films.size();
         for(int i=0; i<nbOfFilms; i++) {
