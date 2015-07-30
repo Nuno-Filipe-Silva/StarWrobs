@@ -122,7 +122,7 @@ public class SWDatabaseContract {
 
     public interface LinkFilmsPlanets {
         String FILM_ID = "film_id";
-        String STARSHIPS_ID = "starships_id";
+        String PLANETS_ID = "planets_id";
     }
 
     public interface LinkFilmsStarships {
