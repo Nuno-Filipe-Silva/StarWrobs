@@ -7,7 +7,7 @@ import com.guillaume.starwrobs.data.database.Db;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.CommonColumns;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.CommonStarshipVehicle;
-import com.guillaume.starwrobs.data.network.model.Vehicle;
+import com.guillaume.starwrobs.fragments.SWListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,15 +58,16 @@ public abstract class VehiclesBrite {
         }
     };
 
-    public static final Func1<Query, List<String>> MAP_STRING = new Func1<Query, List<String>>() {
+    public static final Func1<Query, List<SimpleGenericObjectForRecyclerview>> MAP_STRING = new Func1<Query, List<SimpleGenericObjectForRecyclerview>>() {
         @Override
-        public List<String> call(Query query) {
+        public List<SimpleGenericObjectForRecyclerview> call(Query query) {
             Cursor cursor = query.run();
             try {
-                List<String> values = new ArrayList<>(cursor.getCount());
+                List<SimpleGenericObjectForRecyclerview> values = new ArrayList<>(cursor.getCount());
                 while (cursor.moveToNext()) {
+                    int objectId = Db.getInt(cursor, CommonColumns.COMMON_ID);
                     String name = Db.getString(cursor, CommonStarshipVehicle.STARSHIP_VEHICLE_NAME);
-                    values.add(name);
+                    values.add(new SimpleGenericObjectForRecyclerview(objectId, SWListFragment.KEY_VEHICLES, name));
                 }
                 return values;
             } finally {

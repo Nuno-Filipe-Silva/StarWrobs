@@ -7,6 +7,7 @@ import com.guillaume.starwrobs.data.database.Db;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.CommonColumns;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.Film;
+import com.guillaume.starwrobs.fragments.SWListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,16 +53,18 @@ public abstract class FilmsBrite {
         }
     };
 
-    public static final Func1<Query, List<String>> MAP_STRING = new Func1<Query, List<String>>() {
+    public static final Func1<Query, List<SimpleGenericObjectForRecyclerview>> MAP_STRING = new Func1<Query, List<SimpleGenericObjectForRecyclerview>>() {
         @Override
-        public List<String> call(Query query) {
+        public List<SimpleGenericObjectForRecyclerview> call(Query query) {
             Cursor cursor = query.run();
             try {
-                List<String> values = new ArrayList<>(cursor.getCount());
+                List<SimpleGenericObjectForRecyclerview> values = new ArrayList<>(cursor.getCount());
                 while (cursor.moveToNext()) {
-                    String name = Db.getString(cursor, Film.FILM_TITLE)
+                    int objectId = Db.getInt(cursor, CommonColumns.COMMON_ID);
+                    String title = Db.getString(cursor, Film.FILM_TITLE)
                                 + " (ep " + Db.getInt(cursor, Film.FILM_EPISODE_ID) + ")";
-                    values.add(name);
+
+                    values.add(new SimpleGenericObjectForRecyclerview(objectId, SWListFragment.KEY_FILMS, title));
                 }
                 return values;
             } finally {

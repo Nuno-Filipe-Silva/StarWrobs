@@ -6,4 +6,6 @@
     <color name="accent">#FFDE00</color>
 
     <color name="window_background">#FFF5F5F5</color>
+
+    <color name="dark_purple">#512DA8</color>
 </resources>

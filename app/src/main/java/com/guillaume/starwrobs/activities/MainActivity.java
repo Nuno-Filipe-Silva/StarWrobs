@@ -19,15 +19,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements SWListFragment.Listener {
+
+public class MainActivity extends BaseActivity {
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_main;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         if (viewPager != null) {
@@ -67,16 +69,6 @@ public class MainActivity extends AppCompatActivity implements SWListFragment.Li
         adapter.addFragment(SWListFragment.newInstance(SWListFragment.KEY_STARSHIPS), getString(R.string.ui_tab_starships));
         adapter.addFragment(SWListFragment.newInstance(SWListFragment.KEY_VEHICLES), getString(R.string.ui_tab_vehicles));
         viewPager.setAdapter(adapter);
-    }
-
-    @Override
-    public void onListClicked(long id) {
-
-    }
-
-    @Override
-    public void onNewListClicked() {
-
     }
 
     static class Adapter extends FragmentPagerAdapter {

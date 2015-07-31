@@ -1,11 +1,27 @@
 <resources>
     <string name="app_name">Star Wrobs</string>
+
     <string name="menu_refresh">Refresh data</string>
+    <string name="menu_delete_data">Delete data</string>
+
     <string name="ui_tab_people">People</string>
     <string name="ui_tab_films">Films</string>
     <string name="ui_tab_planets">Planets</string>
     <string name="ui_tab_species">Species</string>
     <string name="ui_tab_starships">Starships</string>
     <string name="ui_tab_vehicles">Vehicles</string>
-    <string name="menu_delete_data">Delete data</string>
+
+    <string name="ui_details_title">Details</string>
+
+
+    <string name="ui_detail_people_name">Name</string>
+    <string name="ui_detail_people_height">Height</string>
+    <string name="ui_detail_people_mass">Mass</string>
+    <string name="ui_detail_people_hair_color">Hair color</string>
+    <string name="ui_detail_people_skin_color">Skin color</string>
+    <string name="ui_detail_people_eye_color">Eye color</string>
+    <string name="ui_detail_people_birth_year">Birth year</string>
+    <string name="ui_detail_people_gender">Gender</string>
+    <string name="ui_detail_people_homeworld">Homeworld</string>
+
 </resources>

@@ -15,6 +15,7 @@ import com.guillaume.starwrobs.data.database.SWDatabaseContract;
 import com.guillaume.starwrobs.data.database.brite.FilmsBrite;
 import com.guillaume.starwrobs.data.database.brite.PeopleBrite;
 import com.guillaume.starwrobs.data.database.brite.PlanetsBrite;
+import com.guillaume.starwrobs.data.database.brite.SimpleGenericObjectForRecyclerview;
 import com.guillaume.starwrobs.data.database.brite.SpeciesBrite;
 import com.guillaume.starwrobs.data.database.brite.StarshipsBrite;
 import com.guillaume.starwrobs.data.database.brite.VehiclesBrite;
@@ -28,6 +29,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.OnItemClick;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -35,11 +37,6 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 public class SWListFragment extends BaseFragment {
-
-    public interface Listener {
-        void onListClicked(long id);
-        void onNewListClicked();
-    }
 
     public static final String ARG_CATEGORY_ID = "arg_category";
     public static final int KEY_PEOPLE = 1;
@@ -50,7 +47,6 @@ public class SWListFragment extends BaseFragment {
     public static final int KEY_VEHICLES = 6;
 
     private int mCategoryId = -1;
-    private Listener listener;
     private Subscription subscription;
     private BaseRecyclerViewAdapter adapter;
 
@@ -82,14 +78,11 @@ public class SWListFragment extends BaseFragment {
 
     @Override
     public void onAttach(Activity activity) {
-        if (!(activity instanceof Listener)) {
-            throw new IllegalStateException("Activity must implement fragment Listener.");
-        }
         super.onAttach(activity);
 
         SWApplication.get(activity).appComponent().inject(this);
 
-        listener = (Listener) activity;
+        mCategoryId = getArguments().getInt(ARG_CATEGORY_ID);
         adapter = new BaseRecyclerViewAdapter(activity);
     }
 
@@ -97,18 +90,17 @@ public class SWListFragment extends BaseFragment {
     public void onViewCreated(View v, Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
 
-        mCategoryId = getArguments().getInt(ARG_CATEGORY_ID);
-
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
         mRecyclerView.setAdapter(adapter);
     }
+
 
     @Override public void onResume() {
         super.onResume();
 
         String table = "";
         String query = "";
-        Func1<SqlBrite.Query, List<String>> map = null;
+        Func1<SqlBrite.Query, List<SimpleGenericObjectForRecyclerview>> map = null;
 
         switch (mCategoryId) {
             case KEY_PEOPLE:

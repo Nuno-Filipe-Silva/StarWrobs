@@ -7,6 +7,7 @@ import com.guillaume.starwrobs.data.database.Db;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.CommonColumns;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.People;
+import com.guillaume.starwrobs.fragments.SWListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +25,12 @@ public abstract class PeopleBrite {
             + " FROM " + SWDatabaseContract.Tables.PEOPLE
             + " ORDER BY " + People.PEOPLE_NAME + " ASC";
 
-    public static final Func1<Query, List<PeopleBrite>> MAP = new Func1<Query, List<PeopleBrite>>() {
+    public static final Func1<Query, PeopleBrite> MAP = new Func1<Query, PeopleBrite>() {
         @Override
-        public List<PeopleBrite> call(Query query) {
+        public PeopleBrite call(Query query) {
             Cursor cursor = query.run();
             try {
-                List<PeopleBrite> values = new ArrayList<>(cursor.getCount());
-                while (cursor.moveToNext()) {
+                if (cursor.moveToFirst()) {
                     long id = Db.getLong(cursor, BaseColumns._ID);
                     int objectId = Db.getInt(cursor, CommonColumns.COMMON_ID);
                     String created = Db.getString(cursor, CommonColumns.COMMON_CREATED);
@@ -46,24 +46,26 @@ public abstract class PeopleBrite {
                     String gender = Db.getString(cursor, People.PEOPLE_GENDER);
                     String homeworld = Db.getString(cursor, People.PEOPLE_HOMEWORLD);
 
-                    values.add(new AutoParcel_PeopleBrite(id, objectId, created, edited, name, height, mass, hairColor, skinColor, eyeColor, birthYear, gender, homeworld));
+                    return new AutoParcel_PeopleBrite(id, objectId, created, edited, name, height, mass, hairColor, skinColor, eyeColor, birthYear, gender, homeworld);
                 }
-                return values;
             } finally {
                 cursor.close();
             }
+
+            return null;
         }
     };
 
-    public static final Func1<Query, List<String>> MAP_STRING = new Func1<Query, List<String>>() {
+    public static final Func1<Query, List<SimpleGenericObjectForRecyclerview>> MAP_STRING = new Func1<Query, List<SimpleGenericObjectForRecyclerview>>() {
         @Override
-        public List<String> call(Query query) {
+        public List<SimpleGenericObjectForRecyclerview> call(Query query) {
             Cursor cursor = query.run();
             try {
-                List<String> values = new ArrayList<>(cursor.getCount());
+                List<SimpleGenericObjectForRecyclerview> values = new ArrayList<>(cursor.getCount());
                 while (cursor.moveToNext()) {
+                    int objectId = Db.getInt(cursor, CommonColumns.COMMON_ID);
                     String name = Db.getString(cursor, People.PEOPLE_NAME);
-                    values.add(name);
+                    values.add(new SimpleGenericObjectForRecyclerview(objectId, SWListFragment.KEY_PEOPLE, name));
                 }
                 return values;
             } finally {

@@ -2,6 +2,7 @@ package com.guillaume.starwrobs.adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -10,26 +11,31 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.guillaume.starwrobs.R;
+import com.guillaume.starwrobs.activities.DetailActivity;
+import com.guillaume.starwrobs.data.database.brite.SimpleGenericObjectForRecyclerview;
 
 import java.util.Collections;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import rx.functions.Action1;
+import timber.log.Timber;
 
 public class BaseRecyclerViewAdapter
         extends RecyclerView.Adapter<BaseRecyclerViewAdapter.ViewHolder>
-        implements Action1<List<String>> {
+        implements Action1<List<SimpleGenericObjectForRecyclerview>> {
 
     private final TypedValue mTypedValue = new TypedValue();
     private int mBackground;
-    private List<String> mValues = Collections.emptyList();
+    private List<SimpleGenericObjectForRecyclerview> mValues = Collections.emptyList();
 
     public BaseRecyclerViewAdapter(Context context) {
         context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
         mBackground = mTypedValue.resourceId;
     }
 
-    public String getValueAt(int position) {
+    public SimpleGenericObjectForRecyclerview getValueAt(int position) {
         return mValues.get(position);
     }
 
@@ -42,18 +48,19 @@ public class BaseRecyclerViewAdapter
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mBoundString = mValues.get(position);
-        holder.mTextView.setText(mValues.get(position));
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        holder.mBoundString = mValues.get(position).name;
+        holder.mTextView.setText(mValues.get(position).name);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
-                /*Intent intent = new Intent(context, CheeseDetailActivity.class);
-                intent.putExtra(CheeseDetailActivity.EXTRA_NAME, holder.mBoundString);
-
-                context.startActivity(intent);*/
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra(DetailActivity.KEY_CATEGORY, getValueAt(position).categoryId);
+                intent.putExtra(DetailActivity.KEY_OBJECT_ID, getValueAt(position).id);
+                intent.putExtra(DetailActivity.KEY_NAME, getValueAt(position).name);
+                context.startActivity(intent);
             }
         });
     }
@@ -64,20 +71,24 @@ public class BaseRecyclerViewAdapter
     }
 
     @Override
-    public void call(List<String> strings) {
+    public void call(List<SimpleGenericObjectForRecyclerview> strings) {
         this.mValues = strings;
         notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mTextView;
+
+        @Bind(R.id.item_name)
+        TextView mTextView;
+
+        View mView;
+
         public String mBoundString;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mTextView = (TextView) view.findViewById(R.id.item_name);
+            ButterKnife.bind(this, view);
         }
 
         @Override
