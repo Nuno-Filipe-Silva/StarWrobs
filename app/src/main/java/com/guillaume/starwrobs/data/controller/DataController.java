@@ -3,7 +3,6 @@ package com.guillaume.starwrobs.data.controller;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.guillaume.starwrobs.SWApplication;
@@ -22,17 +21,19 @@ import com.guillaume.starwrobs.data.network.model.Species;
 import com.guillaume.starwrobs.data.network.model.Starship;
 import com.guillaume.starwrobs.data.network.model.Vehicle;
 import com.guillaume.starwrobs.util.SWFunctions;
+import com.squareup.sqlbrite.BriteDatabase;
 
 import javax.inject.Inject;
 
 import rx.Observable;
 import rx.functions.Action1;
 import rx.functions.Func1;
+import timber.log.Timber;
 
 public class DataController {
 
     @Inject
-    SQLiteDatabase mDatabase;
+    BriteDatabase mDatabase;
 
     @Inject
     ApiManager mApiManager;
@@ -58,7 +59,6 @@ public class DataController {
 
 
             mDatabase.setTransactionSuccessful();
-
         } catch (Exception e) {
             //Error in between database transaction
         } finally {
@@ -66,25 +66,25 @@ public class DataController {
         }
     }
 
-    private void deleteDatabase() {
-        mDatabase.delete(SWDatabaseContract.Tables.PEOPLE, null, null);
-        mDatabase.delete(SWDatabaseContract.LinkTables.LINK_PEOPLE_FILMS, null, null);
-        mDatabase.delete(SWDatabaseContract.LinkTables.LINK_PEOPLE_SPECIES, null, null);
-        mDatabase.delete(SWDatabaseContract.LinkTables.LINK_PEOPLE_STARSHIPS, null, null);
-        mDatabase.delete(SWDatabaseContract.LinkTables.LINK_PEOPLE_VEHICLES, null, null);
+    public void deleteDatabase() {
+        mDatabase.delete(SWDatabaseContract.Tables.PEOPLE, null);
+        mDatabase.delete(SWDatabaseContract.LinkTables.LINK_PEOPLE_FILMS, null);
+        mDatabase.delete(SWDatabaseContract.LinkTables.LINK_PEOPLE_SPECIES, null);
+        mDatabase.delete(SWDatabaseContract.LinkTables.LINK_PEOPLE_STARSHIPS, null);
+        mDatabase.delete(SWDatabaseContract.LinkTables.LINK_PEOPLE_VEHICLES, null);
 
-        mDatabase.delete(SWDatabaseContract.Tables.FILMS, null, null);
-        mDatabase.delete(SWDatabaseContract.LinkTables.LINK_FILMS_PLANETS, null, null);
-        mDatabase.delete(SWDatabaseContract.LinkTables.LINK_FILMS_SPECIES, null, null);
-        mDatabase.delete(SWDatabaseContract.LinkTables.LINK_FILMS_STARSHIPS, null, null);
-        mDatabase.delete(SWDatabaseContract.LinkTables.LINK_FILMS_VEHICLES, null, null);
+        mDatabase.delete(SWDatabaseContract.Tables.FILMS, null);
+        mDatabase.delete(SWDatabaseContract.LinkTables.LINK_FILMS_PLANETS, null);
+        mDatabase.delete(SWDatabaseContract.LinkTables.LINK_FILMS_SPECIES, null);
+        mDatabase.delete(SWDatabaseContract.LinkTables.LINK_FILMS_STARSHIPS, null);
+        mDatabase.delete(SWDatabaseContract.LinkTables.LINK_FILMS_VEHICLES, null);
 
-        mDatabase.delete(SWDatabaseContract.Tables.PLANETS, null, null);
-        mDatabase.delete(SWDatabaseContract.LinkTables.LINK_PLANETS_PEOPLE, null, null);
+        mDatabase.delete(SWDatabaseContract.Tables.PLANETS, null);
+        mDatabase.delete(SWDatabaseContract.LinkTables.LINK_PLANETS_PEOPLE, null);
 
-        mDatabase.delete(SWDatabaseContract.Tables.SPECIES, null, null);
-        mDatabase.delete(SWDatabaseContract.Tables.VEHICLES, null, null);
-        mDatabase.delete(SWDatabaseContract.Tables.STARSHIPS, null, null);
+        mDatabase.delete(SWDatabaseContract.Tables.SPECIES, null);
+        mDatabase.delete(SWDatabaseContract.Tables.VEHICLES, null);
+        mDatabase.delete(SWDatabaseContract.Tables.STARSHIPS, null);
     }
 
     private void getAndInsertPeople() {
@@ -101,7 +101,7 @@ public class DataController {
 
                     @Override
                     public void call(People people) {
-                        Log.d("result", "people = " + people.name);
+                        Timber.d("people = " + people.name);
                         insertPeople(people);
                     }
                 });
@@ -121,7 +121,7 @@ public class DataController {
 
                     @Override
                     public void call(Film film) {
-                        Log.d("result", "film = " + film.title);
+                        Timber.d("film = " + film.title);
                         insertFilm(film);
                     }
                 });
@@ -141,7 +141,7 @@ public class DataController {
 
                     @Override
                     public void call(Planet planet) {
-                        Log.d("result", "planet = " + planet.name);
+                        Timber.d("planet = " + planet.name);
                         insertPlanet(planet);
                     }
                 });
@@ -161,7 +161,7 @@ public class DataController {
 
                     @Override
                     public void call(Species species) {
-                        Log.d("result", "species = " + species.name);
+                        Timber.d("species = " + species.name);
                         insertSpecies(species);
                     }
                 });
@@ -181,7 +181,7 @@ public class DataController {
 
                     @Override
                     public void call(Starship starship) {
-                        Log.d("result", "starship = " + starship.name);
+                        Timber.d("starship = " + starship.name);
                         insertStarship(starship);
                     }
                 });
@@ -201,7 +201,7 @@ public class DataController {
 
                     @Override
                     public void call(Vehicle vehicle) {
-                        Log.d("result", "vehicle = " + vehicle.name);
+                        Timber.d("vehicle = " + vehicle.name);
                         insertVehicle(vehicle);
                     }
                 });
@@ -224,7 +224,7 @@ public class DataController {
         values.put(SWDatabaseContract.People.PEOPLE_BIRTH_YEAR, people.birth_year);
         values.put(SWDatabaseContract.People.PEOPLE_GENDER, people.gender);
         values.put(SWDatabaseContract.People.PEOPLE_HOMEWORLD, people.homeworld);
-        mDatabase.insert(SWDatabaseContract.Tables.PEOPLE, null, values);
+        mDatabase.insert(SWDatabaseContract.Tables.PEOPLE, values);
 
 
         int nbOfIterations = people.films.size();
@@ -232,7 +232,7 @@ public class DataController {
             values.clear();
             values.put(SWDatabaseContract.LinkPeopleFilms.PEOPLE_ID, id);
             values.put(SWDatabaseContract.LinkPeopleFilms.FILM_ID, SWFunctions.getIdFromUrl(people.films.get(i)));
-            mDatabase.insert(SWDatabaseContract.LinkTables.LINK_PEOPLE_FILMS, null, values);
+            mDatabase.insert(SWDatabaseContract.LinkTables.LINK_PEOPLE_FILMS,values);
         }
 
         nbOfIterations = people.species.size();
@@ -240,7 +240,7 @@ public class DataController {
             values.clear();
             values.put(SWDatabaseContract.LinkPeopleSpecies.PEOPLE_ID, id);
             values.put(SWDatabaseContract.LinkPeopleSpecies.SPECIES_ID, SWFunctions.getIdFromUrl(people.species.get(i)));
-            mDatabase.insert(SWDatabaseContract.LinkTables.LINK_PEOPLE_SPECIES, null, values);
+            mDatabase.insert(SWDatabaseContract.LinkTables.LINK_PEOPLE_SPECIES, values);
         }
 
         nbOfIterations = people.vehicles.size();
@@ -248,7 +248,7 @@ public class DataController {
             values.clear();
             values.put(SWDatabaseContract.LinkPeopleVehicles.PEOPLE_ID, id);
             values.put(SWDatabaseContract.LinkPeopleVehicles.VEHICLE_ID, SWFunctions.getIdFromUrl(people.vehicles.get(i)));
-            mDatabase.insert(SWDatabaseContract.LinkTables.LINK_PEOPLE_VEHICLES, null, values);
+            mDatabase.insert(SWDatabaseContract.LinkTables.LINK_PEOPLE_VEHICLES, values);
         }
 
         nbOfIterations = people.starships.size();
@@ -256,7 +256,7 @@ public class DataController {
             values.clear();
             values.put(SWDatabaseContract.LinkPeopleStarships.PEOPLE_ID, id);
             values.put(SWDatabaseContract.LinkPeopleStarships.STARSHIP_ID, SWFunctions.getIdFromUrl(people.starships.get(i)));
-            mDatabase.insert(SWDatabaseContract.LinkTables.LINK_PEOPLE_STARSHIPS, null, values);
+            mDatabase.insert(SWDatabaseContract.LinkTables.LINK_PEOPLE_STARSHIPS, values);
         }
     }
 
@@ -273,7 +273,7 @@ public class DataController {
         values.put(SWDatabaseContract.Film.FILM_EPISODE_ID, film.episode_id);
         values.put(SWDatabaseContract.Film.FILM_OPENING_CRAWL, film.opening_crawl);
         values.put(SWDatabaseContract.Film.FILM_RELEASE_DATE, film.release_date);
-        mDatabase.insert(SWDatabaseContract.Tables.FILMS, null, values);
+        mDatabase.insert(SWDatabaseContract.Tables.FILMS, values);
 
 
         int nbOfIterations = film.planets.size();
@@ -281,7 +281,7 @@ public class DataController {
             values.clear();
             values.put(SWDatabaseContract.LinkFilmsPlanets.FILM_ID, id);
             values.put(SWDatabaseContract.LinkFilmsPlanets.PLANETS_ID, SWFunctions.getIdFromUrl(film.planets.get(i)));
-            mDatabase.insert(SWDatabaseContract.LinkTables.LINK_FILMS_PLANETS, null, values);
+            mDatabase.insert(SWDatabaseContract.LinkTables.LINK_FILMS_PLANETS, values);
         }
 
         nbOfIterations = film.species.size();
@@ -289,7 +289,7 @@ public class DataController {
             values.clear();
             values.put(SWDatabaseContract.LinkFilmsSpecies.FILM_ID, id);
             values.put(SWDatabaseContract.LinkFilmsSpecies.SPECIES_ID, SWFunctions.getIdFromUrl(film.species.get(i)));
-            mDatabase.insert(SWDatabaseContract.LinkTables.LINK_FILMS_SPECIES, null, values);
+            mDatabase.insert(SWDatabaseContract.LinkTables.LINK_FILMS_SPECIES, values);
         }
 
         nbOfIterations = film.starships.size();
@@ -297,7 +297,7 @@ public class DataController {
             values.clear();
             values.put(SWDatabaseContract.LinkFilmsStarships.FILM_ID, id);
             values.put(SWDatabaseContract.LinkFilmsStarships.STARSHIPS_ID, SWFunctions.getIdFromUrl(film.starships.get(i)));
-            mDatabase.insert(SWDatabaseContract.LinkTables.LINK_FILMS_STARSHIPS, null, values);
+            mDatabase.insert(SWDatabaseContract.LinkTables.LINK_FILMS_STARSHIPS, values);
         }
 
         nbOfIterations = film.vehicles.size();
@@ -305,7 +305,7 @@ public class DataController {
             values.clear();
             values.put(SWDatabaseContract.LinkFilmsVehicles.FILM_ID, id);
             values.put(SWDatabaseContract.LinkFilmsVehicles.VEHICLES_ID, SWFunctions.getIdFromUrl(film.vehicles.get(i)));
-            mDatabase.insert(SWDatabaseContract.LinkTables.LINK_FILMS_VEHICLES, null, values);
+            mDatabase.insert(SWDatabaseContract.LinkTables.LINK_FILMS_VEHICLES, values);
         }
     }
 
@@ -325,7 +325,7 @@ public class DataController {
         values.put(SWDatabaseContract.Planet.PLANET_TERRAIN, planet.terrain);
         values.put(SWDatabaseContract.Planet.PLANET_SURFACE_WATER, planet.surface_water);
         values.put(SWDatabaseContract.Planet.PLANET_POPULATION, planet.population);
-        mDatabase.insert(SWDatabaseContract.Tables.PLANETS, null, values);
+        mDatabase.insert(SWDatabaseContract.Tables.PLANETS, values);
 
 
         int nbOfIterations = planet.residents.size();
@@ -333,7 +333,7 @@ public class DataController {
             values.clear();
             values.put(SWDatabaseContract.LinkPlanetsPeople.PLANET_ID, id);
             values.put(SWDatabaseContract.LinkPlanetsPeople.PEOPLE_ID, SWFunctions.getIdFromUrl(planet.residents.get(i)));
-            mDatabase.insert(SWDatabaseContract.LinkTables.LINK_PLANETS_PEOPLE, null, values);
+            mDatabase.insert(SWDatabaseContract.LinkTables.LINK_PLANETS_PEOPLE, values);
         }
     }
 
@@ -353,7 +353,7 @@ public class DataController {
         values.put(SWDatabaseContract.Species.SPECIES_AVERAGE_LIFESPAN, species.average_lifespan);
         values.put(SWDatabaseContract.Species.SPECIES_HOMEWORLD, species.homeworld);
         values.put(SWDatabaseContract.Species.SPECIES_LANGUAGE, species.language);
-        mDatabase.insert(SWDatabaseContract.Tables.SPECIES, null, values);
+        mDatabase.insert(SWDatabaseContract.Tables.SPECIES, values);
     }
 
     private void insertStarship(Starship starship) {
@@ -375,7 +375,7 @@ public class DataController {
         values.put(SWDatabaseContract.CommonStarshipVehicle.STARSHIP_VEHICLE_CLASS, starship.starship_class);
         values.put(SWDatabaseContract.Starship.STARSHIP_HYPERDRIVE_RATING, starship.hyperdrive_rating);
         values.put(SWDatabaseContract.Starship.STARSHIP_MGLT, starship.MGLT);
-        mDatabase.insert(SWDatabaseContract.Tables.STARSHIPS, null, values);
+        mDatabase.insert(SWDatabaseContract.Tables.STARSHIPS, values);
     }
 
     private void insertVehicle(Vehicle vehicle) {
@@ -395,6 +395,6 @@ public class DataController {
         values.put(SWDatabaseContract.CommonStarshipVehicle.STARSHIP_VEHICLE_CARGO_CAPACITY, vehicle.cargo_capacity);
         values.put(SWDatabaseContract.CommonStarshipVehicle.STARSHIP_VEHICLE_CONSUMABLES, vehicle.consumables);
         values.put(SWDatabaseContract.CommonStarshipVehicle.STARSHIP_VEHICLE_CLASS, vehicle.vehicle_class);
-        mDatabase.insert(SWDatabaseContract.Tables.VEHICLES, null, values);
+        mDatabase.insert(SWDatabaseContract.Tables.VEHICLES, values);
     }
 }

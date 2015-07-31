@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.guillaume.starwrobs.data.controller.DataController;
 import com.guillaume.starwrobs.data.database.DbModule;
 import com.guillaume.starwrobs.data.network.ApiModule;
+import com.guillaume.starwrobs.fragments.SWListFragment;
 
 import javax.inject.Singleton;
 
@@ -19,6 +20,6 @@ import dagger.Component;
         }
 )
 public interface AppComponent {
-    // void inject(@NonNull TweetsFragment fragment);
+    void inject(@NonNull SWListFragment fragment);
     void inject(@NonNull DataController dataController);
 }

@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 
 import com.guillaume.starwrobs.data.database.DbModule;
 
+import timber.log.Timber;
+
 public class SWApplication extends Application {
 
     @Nullable
@@ -39,5 +41,13 @@ public class SWApplication extends Application {
                 .appModule(new AppModule(this))
                 .dbModule(new DbModule())
                 .build();
+    }
+
+    @Override public void onCreate() {
+        super.onCreate();
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
     }
 }

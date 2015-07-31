@@ -11,19 +11,22 @@ import android.widget.TextView;
 
 import com.guillaume.starwrobs.R;
 
+import java.util.Collections;
 import java.util.List;
 
+import rx.functions.Action1;
+
 public class BaseRecyclerViewAdapter
-        extends RecyclerView.Adapter<BaseRecyclerViewAdapter.ViewHolder> {
+        extends RecyclerView.Adapter<BaseRecyclerViewAdapter.ViewHolder>
+        implements Action1<List<String>> {
 
     private final TypedValue mTypedValue = new TypedValue();
     private int mBackground;
-    private List<String> mValues;
+    private List<String> mValues = Collections.emptyList();
 
-    public BaseRecyclerViewAdapter(Context context, List<String> items) {
+    public BaseRecyclerViewAdapter(Context context) {
         context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
         mBackground = mTypedValue.resourceId;
-        mValues = items;
     }
 
     public String getValueAt(int position) {
@@ -58,6 +61,12 @@ public class BaseRecyclerViewAdapter
     @Override
     public int getItemCount() {
         return mValues.size();
+    }
+
+    @Override
+    public void call(List<String> strings) {
+        this.mValues = strings;
+        notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

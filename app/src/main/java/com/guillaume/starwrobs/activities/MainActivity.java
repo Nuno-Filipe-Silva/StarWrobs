@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.guillaume.starwrobs.R;
 import com.guillaume.starwrobs.data.controller.DataController;
@@ -18,7 +19,8 @@ import com.guillaume.starwrobs.fragments.SWListFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements SWListFragment.Listener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_refresh:
                 new DataController(getApplicationContext()).refreshData();
                 return true;
+            case R.id.action_delete_data:
+                new DataController(getApplicationContext()).deleteDatabase();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -63,6 +68,16 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(SWListFragment.newInstance(1), getString(R.string.ui_tab_starships));
         adapter.addFragment(SWListFragment.newInstance(1), getString(R.string.ui_tab_vehicles));
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void onListClicked(long id) {
+
+    }
+
+    @Override
+    public void onNewListClicked() {
+
     }
 
     static class Adapter extends FragmentPagerAdapter {

@@ -7,4 +7,5 @@
     <string name="ui_tab_species">Species</string>
     <string name="ui_tab_starships">Starships</string>
     <string name="ui_tab_vehicles">Vehicles</string>
+    <string name="menu_delete_data">Delete data</string>
 </resources>
