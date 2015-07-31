@@ -59,9 +59,9 @@ public class DataController {
 
             mDatabase.setTransactionSuccessful();
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             //Error in between database transaction
-        } finally{
+        } finally {
             mDatabase.endTransaction();
         }
     }

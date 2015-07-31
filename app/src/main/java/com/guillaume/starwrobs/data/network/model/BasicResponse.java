@@ -4,7 +4,7 @@ package com.guillaume.starwrobs.data.network.model;
 /**
  * Schema used to know if there are other results to fetch,
  * if (next != null)
- *    do something
+ * do something
  */
 public class BasicResponse {
 

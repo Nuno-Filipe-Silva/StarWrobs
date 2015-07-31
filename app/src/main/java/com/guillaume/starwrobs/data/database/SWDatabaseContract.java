@@ -1,19 +1,6 @@
 package com.guillaume.starwrobs.data.database;
 
-
-import android.net.Uri;
-
 public class SWDatabaseContract {
-
-    /**
-     * Content provider authority.
-     */
-    public static final String CONTENT_AUTHORITY = "com.guillaume.starwrobs.provider";
-
-    /**
-     * Base URI. (content://com.guillaume.starwrobs.provider)
-     */
-    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     /**
      * Empty constructor
@@ -144,7 +131,6 @@ public class SWDatabaseContract {
         String PLANET_ID = "planet_id";
         String PEOPLE_ID = "people_id";
     }
-
 
 
     public interface Tables {

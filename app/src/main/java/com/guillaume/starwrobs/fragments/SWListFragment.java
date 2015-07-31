@@ -15,17 +15,15 @@ import butterknife.Bind;
 
 public class SWListFragment extends BaseFragment {
 
+    public static final String ARG_CATEGORY_ID = "arg_category";
     @Bind(R.id.recyclerview)
     RecyclerView mRecyclerView;
-
+    private int mCategoryId = -1;
     /**
      * Empty constructor as per the fragment documentation
      */
     public SWListFragment() {
     }
-
-    public static final String ARG_CATEGORY_ID = "arg_category";
-    private int mCategoryId = -1;
 
     public static SWListFragment newInstance(int category) {
         SWListFragment fragment = new SWListFragment();
@@ -58,6 +56,6 @@ public class SWListFragment extends BaseFragment {
         test.add(2, "tu vas");
 
 
-        recyclerView.setAdapter(new BaseRecyclerViewAdapter(getActivity(),test));
+        recyclerView.setAdapter(new BaseRecyclerViewAdapter(getActivity(), test));
     }
 }

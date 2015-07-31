@@ -2,13 +2,11 @@ package com.guillaume.starwrobs.adapter;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.guillaume.starwrobs.R;
@@ -22,32 +20,14 @@ public class BaseRecyclerViewAdapter
     private int mBackground;
     private List<String> mValues;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public String mBoundString;
-
-        public final View mView;
-        public final TextView mTextView;
-
-        public ViewHolder(View view) {
-            super(view);
-            mView = view;
-            mTextView = (TextView) view.findViewById(R.id.item_name);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mTextView.getText();
-        }
-    }
-
-    public String getValueAt(int position) {
-        return mValues.get(position);
-    }
-
     public BaseRecyclerViewAdapter(Context context, List<String> items) {
         context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
         mBackground = mTypedValue.resourceId;
         mValues = items;
+    }
+
+    public String getValueAt(int position) {
+        return mValues.get(position);
     }
 
     @Override
@@ -78,5 +58,22 @@ public class BaseRecyclerViewAdapter
     @Override
     public int getItemCount() {
         return mValues.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public final View mView;
+        public final TextView mTextView;
+        public String mBoundString;
+
+        public ViewHolder(View view) {
+            super(view);
+            mView = view;
+            mTextView = (TextView) view.findViewById(R.id.item_name);
+        }
+
+        @Override
+        public String toString() {
+            return super.toString() + " '" + mTextView.getText();
+        }
     }
 }

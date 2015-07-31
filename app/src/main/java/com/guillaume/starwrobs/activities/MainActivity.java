@@ -13,7 +13,6 @@ import android.view.MenuItem;
 
 import com.guillaume.starwrobs.R;
 import com.guillaume.starwrobs.data.controller.DataController;
-import com.guillaume.starwrobs.fragments.DummyFragment;
 import com.guillaume.starwrobs.fragments.SWListFragment;
 
 import java.util.ArrayList;

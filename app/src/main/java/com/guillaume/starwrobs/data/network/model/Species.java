@@ -2,7 +2,7 @@ package com.guillaume.starwrobs.data.network.model;
 
 import java.util.ArrayList;
 
-public class Species extends BaseObject{
+public class Species extends BaseObject {
     public String name;
     public String classification;
     public String designation;

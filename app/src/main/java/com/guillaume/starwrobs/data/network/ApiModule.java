@@ -1,9 +1,5 @@
 package com.guillaume.starwrobs.data.network;
 
-import android.app.Application;
-import android.support.v4.BuildConfig;
-
-import com.guillaume.starwrobs.SWApplication;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.concurrent.TimeUnit;
