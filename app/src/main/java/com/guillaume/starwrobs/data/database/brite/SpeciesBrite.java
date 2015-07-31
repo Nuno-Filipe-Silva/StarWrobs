@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.provider.BaseColumns;
 
 import com.guillaume.starwrobs.data.database.Db;
+import com.guillaume.starwrobs.data.database.SWDatabaseContract;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.CommonColumns;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.Species;
 
@@ -17,6 +18,11 @@ import static com.squareup.sqlbrite.SqlBrite.Query;
 
 @AutoParcel
 public abstract class SpeciesBrite {
+
+    public static String QUERY = ""
+            + "SELECT *"
+            + " FROM " + SWDatabaseContract.Tables.SPECIES
+            + " ORDER BY " + Species.SPECIES_NAME + " ASC";
 
     public static final Func1<Query, List<SpeciesBrite>> MAP = new Func1<Query, List<SpeciesBrite>>() {
         @Override
@@ -42,6 +48,23 @@ public abstract class SpeciesBrite {
                     String language = Db.getString(cursor, Species.SPECIES_LANGUAGE);
 
                     values.add(new AutoParcel_SpeciesBrite(id, objectId, created, edited, name, classification, designation, averageHeight, skinColors, hairColors, eyeColors, averageLifespan, homeworld, language));
+                }
+                return values;
+            } finally {
+                cursor.close();
+            }
+        }
+    };
+
+    public static final Func1<Query, List<String>> MAP_STRING = new Func1<Query, List<String>>() {
+        @Override
+        public List<String> call(Query query) {
+            Cursor cursor = query.run();
+            try {
+                List<String> values = new ArrayList<>(cursor.getCount());
+                while (cursor.moveToNext()) {
+                    String name = Db.getString(cursor, Species.SPECIES_NAME);
+                    values.add(name);
                 }
                 return values;
             } finally {

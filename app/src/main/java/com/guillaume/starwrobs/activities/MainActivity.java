@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.guillaume.starwrobs.R;
 import com.guillaume.starwrobs.data.controller.DataController;
@@ -61,12 +60,12 @@ public class MainActivity extends AppCompatActivity implements SWListFragment.Li
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(SWListFragment.newInstance(1), getString(R.string.ui_tab_people));
-        adapter.addFragment(SWListFragment.newInstance(1), getString(R.string.ui_tab_films));
-        adapter.addFragment(SWListFragment.newInstance(1), getString(R.string.ui_tab_planets));
-        adapter.addFragment(SWListFragment.newInstance(1), getString(R.string.ui_tab_species));
-        adapter.addFragment(SWListFragment.newInstance(1), getString(R.string.ui_tab_starships));
-        adapter.addFragment(SWListFragment.newInstance(1), getString(R.string.ui_tab_vehicles));
+        adapter.addFragment(SWListFragment.newInstance(SWListFragment.KEY_PEOPLE), getString(R.string.ui_tab_people));
+        adapter.addFragment(SWListFragment.newInstance(SWListFragment.KEY_FILMS), getString(R.string.ui_tab_films));
+        adapter.addFragment(SWListFragment.newInstance(SWListFragment.KEY_PLANETS), getString(R.string.ui_tab_planets));
+        adapter.addFragment(SWListFragment.newInstance(SWListFragment.KEY_SPECIES), getString(R.string.ui_tab_species));
+        adapter.addFragment(SWListFragment.newInstance(SWListFragment.KEY_STARSHIPS), getString(R.string.ui_tab_starships));
+        adapter.addFragment(SWListFragment.newInstance(SWListFragment.KEY_VEHICLES), getString(R.string.ui_tab_vehicles));
         viewPager.setAdapter(adapter);
     }
 

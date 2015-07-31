@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.provider.BaseColumns;
 
 import com.guillaume.starwrobs.data.database.Db;
+import com.guillaume.starwrobs.data.database.SWDatabaseContract;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.CommonColumns;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.Film;
 
@@ -17,6 +18,11 @@ import static com.squareup.sqlbrite.SqlBrite.Query;
 
 @AutoParcel
 public abstract class FilmsBrite {
+
+    public static String QUERY = ""
+            + "SELECT *"
+            + " FROM " + SWDatabaseContract.Tables.FILMS
+            + " ORDER BY " + Film.FILM_EPISODE_ID + " ASC";
 
     public static final Func1<Query, List<FilmsBrite>> MAP = new Func1<Query, List<FilmsBrite>>() {
         @Override
@@ -38,6 +44,24 @@ public abstract class FilmsBrite {
                     String releaseDate = Db.getString(cursor, Film.FILM_RELEASE_DATE);
 
                     values.add(new AutoParcel_FilmsBrite(id, objectId, created, edited, title, episodeId, openingCrawl, director, producer, releaseDate));
+                }
+                return values;
+            } finally {
+                cursor.close();
+            }
+        }
+    };
+
+    public static final Func1<Query, List<String>> MAP_STRING = new Func1<Query, List<String>>() {
+        @Override
+        public List<String> call(Query query) {
+            Cursor cursor = query.run();
+            try {
+                List<String> values = new ArrayList<>(cursor.getCount());
+                while (cursor.moveToNext()) {
+                    String name = Db.getString(cursor, Film.FILM_TITLE)
+                                + " (ep " + Db.getInt(cursor, Film.FILM_EPISODE_ID) + ")";
+                    values.add(name);
                 }
                 return values;
             } finally {

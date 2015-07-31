@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.provider.BaseColumns;
 
 import com.guillaume.starwrobs.data.database.Db;
+import com.guillaume.starwrobs.data.database.SWDatabaseContract;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.CommonColumns;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.Planet;
 
@@ -17,6 +18,11 @@ import static com.squareup.sqlbrite.SqlBrite.Query;
 
 @AutoParcel
 public abstract class PlanetsBrite {
+
+    public static String QUERY = ""
+            + "SELECT *"
+            + " FROM " + SWDatabaseContract.Tables.PLANETS
+            + " ORDER BY " + Planet.PLANET_NAME + " ASC";
 
     public static final Func1<Query, List<PlanetsBrite>> MAP = new Func1<Query, List<PlanetsBrite>>() {
         @Override
@@ -41,6 +47,23 @@ public abstract class PlanetsBrite {
                     String population = Db.getString(cursor, Planet.PLANET_POPULATION);
 
                     values.add(new AutoParcel_PlanetsBrite(id, objectId, created, edited, name, rotationPeriod, orbitalPeriod, diameter, climate, gravity, terrain, surfaceWater, population));
+                }
+                return values;
+            } finally {
+                cursor.close();
+            }
+        }
+    };
+
+    public static final Func1<Query, List<String>> MAP_STRING = new Func1<Query, List<String>>() {
+        @Override
+        public List<String> call(Query query) {
+            Cursor cursor = query.run();
+            try {
+                List<String> values = new ArrayList<>(cursor.getCount());
+                while (cursor.moveToNext()) {
+                    String name = Db.getString(cursor, Planet.PLANET_NAME);
+                    values.add(name);
                 }
                 return values;
             } finally {

@@ -41,7 +41,7 @@ public interface ApiInterface {
     /**
      * Fetch starships page
      */
-    @GET("/species/")
+    @GET("/starships/")
     Observable<ResultStarships> fetchStarships(@Query("page") int page);
 
     /**

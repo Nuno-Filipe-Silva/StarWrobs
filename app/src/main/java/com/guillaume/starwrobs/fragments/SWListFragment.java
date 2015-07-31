@@ -12,8 +12,15 @@ import com.guillaume.starwrobs.R;
 import com.guillaume.starwrobs.SWApplication;
 import com.guillaume.starwrobs.adapter.BaseRecyclerViewAdapter;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract;
+import com.guillaume.starwrobs.data.database.brite.FilmsBrite;
 import com.guillaume.starwrobs.data.database.brite.PeopleBrite;
+import com.guillaume.starwrobs.data.database.brite.PlanetsBrite;
+import com.guillaume.starwrobs.data.database.brite.SpeciesBrite;
+import com.guillaume.starwrobs.data.database.brite.StarshipsBrite;
+import com.guillaume.starwrobs.data.database.brite.VehiclesBrite;
+import com.guillaume.starwrobs.data.network.model.Vehicle;
 import com.squareup.sqlbrite.BriteDatabase;
+import com.squareup.sqlbrite.SqlBrite;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +31,7 @@ import butterknife.Bind;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 public class SWListFragment extends BaseFragment {
@@ -34,6 +42,12 @@ public class SWListFragment extends BaseFragment {
     }
 
     public static final String ARG_CATEGORY_ID = "arg_category";
+    public static final int KEY_PEOPLE = 1;
+    public static final int KEY_FILMS = 2;
+    public static final int KEY_PLANETS = 3;
+    public static final int KEY_SPECIES = 4;
+    public static final int KEY_STARSHIPS = 5;
+    public static final int KEY_VEHICLES = 6;
 
     private int mCategoryId = -1;
     private Listener listener;
@@ -92,8 +106,47 @@ public class SWListFragment extends BaseFragment {
     @Override public void onResume() {
         super.onResume();
 
-        subscription = db.createQuery(SWDatabaseContract.Tables.PEOPLE, PeopleBrite.QUERY)
-                .map(PeopleBrite.MAP_STRING)
+        String table = "";
+        String query = "";
+        Func1<SqlBrite.Query, List<String>> map = null;
+
+        switch (mCategoryId) {
+            case KEY_PEOPLE:
+                table = SWDatabaseContract.Tables.PEOPLE;
+                query = PeopleBrite.QUERY;
+                map = PeopleBrite.MAP_STRING;
+                break;
+            case KEY_FILMS:
+                table = SWDatabaseContract.Tables.FILMS;
+                query = FilmsBrite.QUERY;
+                map = FilmsBrite.MAP_STRING;
+                break;
+            case KEY_PLANETS:
+                table = SWDatabaseContract.Tables.PLANETS;
+                query = PlanetsBrite.QUERY;
+                map = PlanetsBrite.MAP_STRING;
+                break;
+            case KEY_SPECIES:
+                table = SWDatabaseContract.Tables.SPECIES;
+                query = SpeciesBrite.QUERY;
+                map = SpeciesBrite.MAP_STRING;
+                break;
+            case KEY_STARSHIPS:
+                table = SWDatabaseContract.Tables.STARSHIPS;
+                query = StarshipsBrite.QUERY;
+                map = StarshipsBrite.MAP_STRING;
+                break;
+            case KEY_VEHICLES:
+                table = SWDatabaseContract.Tables.VEHICLES;
+                query = VehiclesBrite.QUERY;
+                map = VehiclesBrite.MAP_STRING;
+                break;
+        }
+
+
+
+        subscription = db.createQuery(table, query)
+                .map(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(adapter);

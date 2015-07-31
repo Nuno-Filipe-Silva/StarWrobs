@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.provider.BaseColumns;
 
 import com.guillaume.starwrobs.data.database.Db;
+import com.guillaume.starwrobs.data.database.SWDatabaseContract;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.CommonColumns;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.CommonStarshipVehicle;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.Starship;
@@ -18,6 +19,11 @@ import static com.squareup.sqlbrite.SqlBrite.Query;
 
 @AutoParcel
 public abstract class StarshipsBrite {
+
+    public static String QUERY = ""
+            + "SELECT *"
+            + " FROM " + SWDatabaseContract.Tables.STARSHIPS
+            + " ORDER BY " + CommonStarshipVehicle.STARSHIP_VEHICLE_NAME + " ASC";
 
     public static final Func1<Query, List<StarshipsBrite>> MAP = new Func1<Query, List<StarshipsBrite>>() {
         @Override
@@ -47,6 +53,23 @@ public abstract class StarshipsBrite {
                     String MGLT = Db.getString(cursor, Starship.STARSHIP_MGLT);
 
                     values.add(new AutoParcel_StarshipsBrite(id, objectId, created, edited, name, model, manufacturer, costInCredits, length, maxAtmospheringSpeed, crew, passengers, cargoCapacity, consumables, objectClass, hyperdriveRating, MGLT));
+                }
+                return values;
+            } finally {
+                cursor.close();
+            }
+        }
+    };
+
+    public static final Func1<Query, List<String>> MAP_STRING = new Func1<Query, List<String>>() {
+        @Override
+        public List<String> call(Query query) {
+            Cursor cursor = query.run();
+            try {
+                List<String> values = new ArrayList<>(cursor.getCount());
+                while (cursor.moveToNext()) {
+                    String name = Db.getString(cursor, CommonStarshipVehicle.STARSHIP_VEHICLE_NAME);
+                    values.add(name);
                 }
                 return values;
             } finally {
