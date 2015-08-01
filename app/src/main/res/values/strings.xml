@@ -23,5 +23,6 @@
     <string name="ui_detail_people_birth_year">Birth year</string>
     <string name="ui_detail_people_gender">Gender</string>
     <string name="ui_detail_people_homeworld">Homeworld</string>
+    <string name="ui_cast_title">Cast</string>
 
 </resources>

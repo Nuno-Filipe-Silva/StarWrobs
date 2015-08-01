@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/spacing_micro"
         android:layout_gravity="center_vertical"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         tools:text="Height" />
 
@@ -23,8 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:drawablePadding="@dimen/spacing_micro"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textColor="@color/dark_purple"
         tools:text="Height" />
 

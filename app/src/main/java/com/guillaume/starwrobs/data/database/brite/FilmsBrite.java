@@ -73,6 +73,35 @@ public abstract class FilmsBrite {
         }
     };
 
+    public static final Func1<Query, FilmsBrite> MAP_FILMSBRITE_UNIQUE = new Func1<Query, FilmsBrite>() {
+        @Override
+        public FilmsBrite call(Query query) {
+            Cursor cursor = query.run();
+            try {
+
+                if (cursor.moveToFirst()) {
+                    long id = Db.getLong(cursor, BaseColumns._ID);
+                    int objectId = Db.getInt(cursor, CommonColumns.COMMON_ID);
+                    String created = Db.getString(cursor, CommonColumns.COMMON_CREATED);
+                    String edited = Db.getString(cursor, CommonColumns.COMMON_EDITED);
+
+                    String title = Db.getString(cursor, Film.FILM_TITLE);
+                    int episodeId = Db.getInt(cursor, Film.FILM_EPISODE_ID);
+                    String openingCrawl = Db.getString(cursor, Film.FILM_OPENING_CRAWL);
+                    String director = Db.getString(cursor, Film.FILM_DIRECTOR);
+                    String producer = Db.getString(cursor, Film.FILM_PRODUCER);
+                    String releaseDate = Db.getString(cursor, Film.FILM_RELEASE_DATE);
+
+                    return new AutoParcel_FilmsBrite(id, objectId, created, edited, title, episodeId, openingCrawl, director, producer, releaseDate);
+                }
+            } finally {
+                cursor.close();
+            }
+
+            return null;
+        }
+    };
+
     public abstract long id();
 
     public abstract int objectId();

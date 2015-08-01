@@ -223,7 +223,7 @@ public class DataController {
         values.put(SWDatabaseContract.People.PEOPLE_EYE_COLOR, people.eye_color);
         values.put(SWDatabaseContract.People.PEOPLE_BIRTH_YEAR, people.birth_year);
         values.put(SWDatabaseContract.People.PEOPLE_GENDER, people.gender);
-        values.put(SWDatabaseContract.People.PEOPLE_HOMEWORLD, people.homeworld);
+        values.put(SWDatabaseContract.People.PEOPLE_HOMEWORLD, SWFunctions.getIdFromUrl(people.homeworld));
         mDatabase.insert(SWDatabaseContract.Tables.PEOPLE, values);
 
 

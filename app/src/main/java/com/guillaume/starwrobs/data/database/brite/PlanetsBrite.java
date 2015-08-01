@@ -74,6 +74,23 @@ public abstract class PlanetsBrite {
         }
     };
 
+    public static final Func1<Query, SimpleGenericObjectForRecyclerview> MAP_STRING_UNIQUE = new Func1<Query, SimpleGenericObjectForRecyclerview>() {
+        @Override
+        public SimpleGenericObjectForRecyclerview call(Query query) {
+            Cursor cursor = query.run();
+            try {
+                if (cursor.moveToFirst()) {
+                    int objectId = Db.getInt(cursor, CommonColumns.COMMON_ID);
+                    String name = Db.getString(cursor, Planet.PLANET_NAME);
+                    return new SimpleGenericObjectForRecyclerview(objectId, SWListFragment.KEY_PLANETS, name);
+                }
+            } finally {
+                cursor.close();
+            }
+            return null;
+        }
+    };
+
     public abstract long id();
 
     public abstract int objectId();

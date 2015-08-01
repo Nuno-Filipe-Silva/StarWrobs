@@ -20,17 +20,16 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import rx.functions.Action1;
-import timber.log.Timber;
 
-public class BaseRecyclerViewAdapter
-        extends RecyclerView.Adapter<BaseRecyclerViewAdapter.ViewHolder>
+public class ReactiveGenericRecyclerViewAdapter
+        extends RecyclerView.Adapter<ReactiveGenericRecyclerViewAdapter.ViewHolder>
         implements Action1<List<SimpleGenericObjectForRecyclerview>> {
 
     private final TypedValue mTypedValue = new TypedValue();
     private int mBackground;
     private List<SimpleGenericObjectForRecyclerview> mValues = Collections.emptyList();
 
-    public BaseRecyclerViewAdapter(Context context) {
+    public ReactiveGenericRecyclerViewAdapter(Context context) {
         context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
         mBackground = mTypedValue.resourceId;
     }

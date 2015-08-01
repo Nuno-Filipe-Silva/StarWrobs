@@ -57,6 +57,39 @@ public abstract class SpeciesBrite {
         }
     };
 
+    public static final Func1<Query, SpeciesBrite> MAP_SPECIESBRITE_UNIQUE = new Func1<Query, SpeciesBrite>() {
+        @Override
+        public SpeciesBrite call(Query query) {
+            Cursor cursor = query.run();
+            try {
+
+                if (cursor.moveToFirst()) {
+                    long id = Db.getLong(cursor, BaseColumns._ID);
+                    int objectId = Db.getInt(cursor, CommonColumns.COMMON_ID);
+                    String created = Db.getString(cursor, CommonColumns.COMMON_CREATED);
+                    String edited = Db.getString(cursor, CommonColumns.COMMON_EDITED);
+
+                    String name = Db.getString(cursor, Species.SPECIES_NAME);
+                    String classification = Db.getString(cursor, Species.SPECIES_CLASSIFICATION);
+                    String designation = Db.getString(cursor, Species.SPECIES_DESIGNATION);
+                    String averageHeight = Db.getString(cursor, Species.SPECIES_AVERAGE_HEIGHT);
+                    String skinColors = Db.getString(cursor, Species.SPECIES_SKIN_COLORS);
+                    String hairColors = Db.getString(cursor, Species.SPECIES_HAIR_COLORS);
+                    String eyeColors = Db.getString(cursor, Species.SPECIES_EYE_COLORS);
+                    String averageLifespan = Db.getString(cursor, Species.SPECIES_AVERAGE_LIFESPAN);
+                    String homeworld = Db.getString(cursor, Species.SPECIES_HOMEWORLD);
+                    String language = Db.getString(cursor, Species.SPECIES_LANGUAGE);
+
+                    return new AutoParcel_SpeciesBrite(id, objectId, created, edited, name, classification, designation, averageHeight, skinColors, hairColors, eyeColors, averageLifespan, homeworld, language);
+                }
+            } finally {
+                cursor.close();
+            }
+
+            return null;
+        }
+    };
+
     public static final Func1<Query, List<SimpleGenericObjectForRecyclerview>> MAP_STRING = new Func1<Query, List<SimpleGenericObjectForRecyclerview>>() {
         @Override
         public List<SimpleGenericObjectForRecyclerview> call(Query query) {

@@ -44,7 +44,7 @@ public abstract class PeopleBrite {
                     String eyeColor = Db.getString(cursor, People.PEOPLE_EYE_COLOR);
                     String birthYear = Db.getString(cursor, People.PEOPLE_BIRTH_YEAR);
                     String gender = Db.getString(cursor, People.PEOPLE_GENDER);
-                    String homeworld = Db.getString(cursor, People.PEOPLE_HOMEWORLD);
+                    int homeworld = Db.getInt(cursor, People.PEOPLE_HOMEWORLD);
 
                     return new AutoParcel_PeopleBrite(id, objectId, created, edited, name, height, mass, hairColor, skinColor, eyeColor, birthYear, gender, homeworld);
                 }
@@ -98,7 +98,7 @@ public abstract class PeopleBrite {
 
     public abstract String gender();
 
-    public abstract String homeworld();
+    public abstract int homeworld();
 
     public static final class Builder extends BaseBuilder {
 

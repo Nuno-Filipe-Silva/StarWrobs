@@ -2,7 +2,6 @@ package com.guillaume.starwrobs.fragments;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +9,7 @@ import android.view.View;
 
 import com.guillaume.starwrobs.R;
 import com.guillaume.starwrobs.SWApplication;
-import com.guillaume.starwrobs.adapter.BaseRecyclerViewAdapter;
+import com.guillaume.starwrobs.adapter.ReactiveGenericRecyclerViewAdapter;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract;
 import com.guillaume.starwrobs.data.database.brite.FilmsBrite;
 import com.guillaume.starwrobs.data.database.brite.PeopleBrite;
@@ -19,20 +18,16 @@ import com.guillaume.starwrobs.data.database.brite.SimpleGenericObjectForRecycle
 import com.guillaume.starwrobs.data.database.brite.SpeciesBrite;
 import com.guillaume.starwrobs.data.database.brite.StarshipsBrite;
 import com.guillaume.starwrobs.data.database.brite.VehiclesBrite;
-import com.guillaume.starwrobs.data.network.model.Vehicle;
 import com.squareup.sqlbrite.BriteDatabase;
 import com.squareup.sqlbrite.SqlBrite;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import butterknife.OnItemClick;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
@@ -48,7 +43,7 @@ public class SWListFragment extends BaseFragment {
 
     private int mCategoryId = -1;
     private Subscription subscription;
-    private BaseRecyclerViewAdapter adapter;
+    private ReactiveGenericRecyclerViewAdapter adapter;
 
 
     @Bind(R.id.recyclerview)
@@ -83,7 +78,7 @@ public class SWListFragment extends BaseFragment {
         SWApplication.get(activity).appComponent().inject(this);
 
         mCategoryId = getArguments().getInt(ARG_CATEGORY_ID);
-        adapter = new BaseRecyclerViewAdapter(activity);
+        adapter = new ReactiveGenericRecyclerViewAdapter(activity);
     }
 
     @Override
