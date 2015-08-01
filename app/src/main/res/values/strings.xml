@@ -24,5 +24,12 @@
     <string name="ui_detail_people_gender">Gender</string>
     <string name="ui_detail_people_homeworld">Homeworld</string>
     <string name="ui_cast_title">Cast</string>
+    <string name="ui_detail_film_title">Title</string>
+    <string name="ui_detail_film_episode_id">Episode number</string>
+    <string name="ui_detail_film_release_date">Release date</string>
+    <string name="ui_detail_film_director">Director</string>
+    <string name="ui_detail_film_producer">Producer</string>
+    <string name="ui_detail_film_opening_crawl">Opening crawl</string>
+    <string name="ui_card_characters">Characters</string>
 
 </resources>

@@ -19,8 +19,8 @@ public class DetailInfoLayout extends LinearLayout {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.include_item_detail_card, this, true);
 
-        mTitleTextView = (TextView) findViewById(android.R.id.text1);
-        mContentTextView = (TextView) findViewById(android.R.id.text2);
+        mTitleTextView = (TextView) findViewById(R.id.textItemName);
+        mContentTextView = (TextView) findViewById(R.id.textItemValue);
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DetailInfoLayout);
 

@@ -25,13 +25,12 @@ public abstract class FilmsBrite {
             + " FROM " + SWDatabaseContract.Tables.FILMS
             + " ORDER BY " + Film.FILM_EPISODE_ID + " ASC";
 
-    public static final Func1<Query, List<FilmsBrite>> MAP = new Func1<Query, List<FilmsBrite>>() {
+    public static final Func1<Query, FilmsBrite> MAP = new Func1<Query, FilmsBrite>() {
         @Override
-        public List<FilmsBrite> call(Query query) {
+        public FilmsBrite call(Query query) {
             Cursor cursor = query.run();
             try {
-                List<FilmsBrite> values = new ArrayList<>(cursor.getCount());
-                while (cursor.moveToNext()) {
+                if (cursor.moveToFirst()) {
                     long id = Db.getLong(cursor, BaseColumns._ID);
                     int objectId = Db.getInt(cursor, CommonColumns.COMMON_ID);
                     String created = Db.getString(cursor, CommonColumns.COMMON_CREATED);
@@ -44,12 +43,13 @@ public abstract class FilmsBrite {
                     String producer = Db.getString(cursor, Film.FILM_PRODUCER);
                     String releaseDate = Db.getString(cursor, Film.FILM_RELEASE_DATE);
 
-                    values.add(new AutoParcel_FilmsBrite(id, objectId, created, edited, title, episodeId, openingCrawl, director, producer, releaseDate));
+                    return new AutoParcel_FilmsBrite(id, objectId, created, edited, title, episodeId, openingCrawl, director, producer, releaseDate);
                 }
-                return values;
             } finally {
                 cursor.close();
             }
+
+            return null;
         }
     };
 

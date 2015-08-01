@@ -30,6 +30,23 @@ public class QueryLinkTables {
         }
     };
 
+    public static final Func1<SqlBrite.Query, List<Integer>> QUERY_GET_PEOPLE_WHERE_FILM = new Func1<SqlBrite.Query, List<Integer>>() {
+        @Override
+        public List<Integer> call(SqlBrite.Query query) {
+            Cursor cursor = query.run();
+            try {
+                List<Integer> list = new ArrayList<>(cursor.getCount());
+                while (cursor.moveToNext()) {
+                    int filmId = Db.getInt(cursor, SWDatabaseContract.LinkPeopleFilms.PEOPLE_ID);
+                    list.add(filmId);
+                }
+                return list;
+            } finally {
+                cursor.close();
+            }
+        }
+    };
+
     public static final Func1<SqlBrite.Query, List<Integer>> QUERY_GET_SPECIES_WHERE_PEOPLE = new Func1<SqlBrite.Query, List<Integer>>() {
         @Override
         public List<Integer> call(SqlBrite.Query query) {
