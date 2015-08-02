@@ -32,43 +32,7 @@ public abstract class StarshipsBrite {
             + SWDatabaseContract.CommonColumns.COMMON_ID
             + " = ?";
 
-    public static final Func1<Query, List<StarshipsBrite>> MAP = new Func1<Query, List<StarshipsBrite>>() {
-        @Override
-        public List<StarshipsBrite> call(Query query) {
-            Cursor cursor = query.run();
-            try {
-                List<StarshipsBrite> values = new ArrayList<>(cursor.getCount());
-                while (cursor.moveToNext()) {
-                    long id = Db.getLong(cursor, BaseColumns._ID);
-                    int objectId = Db.getInt(cursor, CommonColumns.COMMON_ID);
-                    String created = Db.getString(cursor, CommonColumns.COMMON_CREATED);
-                    String edited = Db.getString(cursor, CommonColumns.COMMON_EDITED);
-
-                    String name = Db.getString(cursor, CommonStarshipVehicle.STARSHIP_VEHICLE_NAME);
-                    String model = Db.getString(cursor, CommonStarshipVehicle.STARSHIP_VEHICLE_MODEL);
-                    String manufacturer = Db.getString(cursor, CommonStarshipVehicle.STARSHIP_VEHICLE_MANUFACTURER);
-                    String costInCredits = Db.getString(cursor, CommonStarshipVehicle.STARSHIP_VEHICLE_COST_IN_CREDITS);
-                    String length = Db.getString(cursor, CommonStarshipVehicle.STARSHIP_VEHICLE_LENGTH);
-                    String maxAtmospheringSpeed = Db.getString(cursor, CommonStarshipVehicle.STARSHIP_VEHICLE_MAX_ATMOSPHERING_SPEED);
-                    String crew = Db.getString(cursor, CommonStarshipVehicle.STARSHIP_VEHICLE_CREW);
-                    String passengers = Db.getString(cursor, CommonStarshipVehicle.STARSHIP_VEHICLE_PASSENGERS);
-                    String cargoCapacity = Db.getString(cursor, CommonStarshipVehicle.STARSHIP_VEHICLE_CARGO_CAPACITY);
-                    String consumables = Db.getString(cursor, CommonStarshipVehicle.STARSHIP_VEHICLE_CONSUMABLES);
-                    String objectClass = Db.getString(cursor, CommonStarshipVehicle.STARSHIP_VEHICLE_CLASS);
-
-                    String hyperdriveRating = Db.getString(cursor, Starship.STARSHIP_HYPERDRIVE_RATING);
-                    String MGLT = Db.getString(cursor, Starship.STARSHIP_MGLT);
-
-                    values.add(new AutoParcel_StarshipsBrite(id, objectId, created, edited, name, model, manufacturer, costInCredits, length, maxAtmospheringSpeed, crew, passengers, cargoCapacity, consumables, objectClass, hyperdriveRating, MGLT));
-                }
-                return values;
-            } finally {
-                cursor.close();
-            }
-        }
-    };
-
-    public static final Func1<Query, StarshipsBrite> MAP_STARSHIPSBRITE_UNIQUE = new Func1<Query, StarshipsBrite>() {
+    public static final Func1<Query, StarshipsBrite> MAP = new Func1<Query, StarshipsBrite>() {
         @Override
         public StarshipsBrite call(Query query) {
             Cursor cursor = query.run();
@@ -94,7 +58,7 @@ public abstract class StarshipsBrite {
                     String hyperdriveRating = Db.getString(cursor, Starship.STARSHIP_HYPERDRIVE_RATING);
                     String MGLT = Db.getString(cursor, Starship.STARSHIP_MGLT);
 
-                    return new AutoParcel_StarshipsBrite(id, objectId, created, edited, name, model, manufacturer, costInCredits, length, maxAtmospheringSpeed, crew, passengers, cargoCapacity, consumables, objectClass, hyperdriveRating, MGLT);
+                    return(new AutoParcel_StarshipsBrite(id, objectId, created, edited, name, model, manufacturer, costInCredits, length, maxAtmospheringSpeed, crew, passengers, cargoCapacity, consumables, objectClass, hyperdriveRating, MGLT));
                 }
             } finally {
                 cursor.close();

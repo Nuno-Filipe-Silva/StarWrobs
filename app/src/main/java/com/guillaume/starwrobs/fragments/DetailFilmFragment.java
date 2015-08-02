@@ -38,6 +38,9 @@ public class DetailFilmFragment extends BaseDetailFragment {
     @Bind(R.id.cardCharacters)
     LinearLayout mLinearCharacters;
 
+    @Bind(R.id.cardPlanets)
+    LinearLayout mLinearPlanets;
+
     @Bind(R.id.cardSpecies)
     LinearLayout mLinearSpecies;
 
@@ -107,6 +110,19 @@ public class DetailFilmFragment extends BaseDetailFragment {
                     public void onNext(List<Integer> species) {
                         for (int i = 0; i < species.size(); i++) {
                             addSpeciesForId(species.get(i), mLinearSpecies);
+                        }
+                    }
+                }));
+
+        subscriptions.add(db.createQuery(LinkTables.LINK_FILMS_PLANETS, QueryLinkTables.QUERY_LINK_FILMS_PLANETS_GET_PLANETS_FOR_FILM_ID, String.valueOf(objectId))
+                .map(QueryLinkTables.QUERY_GET_ALL_PLANETS_IDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SimpleObserver<List<Integer>>() {
+                    @Override
+                    public void onNext(List<Integer> species) {
+                        for (int i = 0; i < species.size(); i++) {
+                            addPlanetsForId(species.get(i), mLinearPlanets);
                         }
                     }
                 }));

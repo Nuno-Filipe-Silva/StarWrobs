@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import com.guillaume.starwrobs.R;
 import com.guillaume.starwrobs.fragments.DetailFilmFragment;
 import com.guillaume.starwrobs.fragments.DetailPeopleFragment;
+import com.guillaume.starwrobs.fragments.DetailPlanetsFragment;
 import com.guillaume.starwrobs.fragments.SWListFragment;
 
 import butterknife.Bind;
@@ -72,6 +73,7 @@ public class DetailActivity extends BaseActivity {
                 break;
             case (SWListFragment.KEY_PLANETS):
                 resId = R.drawable.planets;
+                fragment = DetailPlanetsFragment.newInstance(objectId);
                 break;
             case (SWListFragment.KEY_SPECIES):
                 resId = R.drawable.species;

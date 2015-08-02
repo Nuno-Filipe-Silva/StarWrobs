@@ -18,6 +18,7 @@ import java.util.List;
 import butterknife.Bind;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 public class DetailPeopleFragment extends BaseDetailFragment {
 

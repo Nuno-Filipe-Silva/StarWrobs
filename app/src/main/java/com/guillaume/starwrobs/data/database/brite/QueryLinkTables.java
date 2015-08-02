@@ -48,6 +48,23 @@ public class QueryLinkTables {
         }
     };
 
+    public static final Func1<SqlBrite.Query, List<Integer>> QUERY_GET_ALL_PLANETS_IDS = new Func1<SqlBrite.Query, List<Integer>>() {
+        @Override
+        public List<Integer> call(SqlBrite.Query query) {
+            Cursor cursor = query.run();
+            try {
+                List<Integer> list = new ArrayList<>(cursor.getCount());
+                while (cursor.moveToNext()) {
+                    int id = Db.getInt(cursor, SimpleIds.PLANETS_ID);
+                    list.add(id);
+                }
+                return list;
+            } finally {
+                cursor.close();
+            }
+        }
+    };
+
     public static final Func1<SqlBrite.Query, List<Integer>> QUERY_GET_ALL_SPECIES_IDS = new Func1<SqlBrite.Query, List<Integer>>() {
         @Override
         public List<Integer> call(SqlBrite.Query query) {
@@ -168,6 +185,28 @@ public class QueryLinkTables {
             + " WHERE "
             + SimpleIds.VEHICLES_ID
             + " = ?";
+
+    /**
+     * FILMS - PLANETS
+     */
+
+    public static final String QUERY_LINK_FILMS_PLANETS_GET_PLANETS_FOR_FILM_ID = "SELECT * FROM "
+            + LinkTables.LINK_FILMS_PLANETS
+            + " WHERE "
+            + SimpleIds.FILM_ID
+            + " = ?"
+            + " ORDER BY "
+            + SimpleIds.PLANETS_ID
+            + " ASC";
+
+    public static final String QUERY_LINK_FILMS_PLANETS_GET_FILMS_FOR_PLANET_ID = "SELECT * FROM "
+            + LinkTables.LINK_FILMS_PLANETS
+            + " WHERE "
+            + SimpleIds.PLANETS_ID
+            + " = ?"
+            + " ORDER BY "
+            + SimpleIds.FILM_ID
+            + " ASC";
 
     /**
      * FILMS - SPECIES

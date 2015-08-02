@@ -11,7 +11,9 @@ import android.widget.TextView;
 import com.guillaume.starwrobs.R;
 import com.guillaume.starwrobs.SWApplication;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.Tables;
+import com.guillaume.starwrobs.data.database.brite.FilmsBrite;
 import com.guillaume.starwrobs.data.database.brite.PeopleBrite;
+import com.guillaume.starwrobs.data.database.brite.PlanetsBrite;
 import com.guillaume.starwrobs.data.database.brite.SpeciesBrite;
 import com.guillaume.starwrobs.data.database.brite.StarshipsBrite;
 import com.guillaume.starwrobs.data.database.brite.VehiclesBrite;
@@ -57,7 +59,7 @@ public abstract class BaseDetailFragment extends BaseFragment {
     }
 
 
-    protected void addPeopleForId(final int id, final LinearLayout mLinearCharacters) {
+    protected void addPeopleForId(final int id, final LinearLayout mLinear) {
         subscriptions.add(db.createQuery(Tables.PEOPLE, PeopleBrite.QUERY_GET_PEOPLE_FROM_ID, String.valueOf(id))
                 .map(PeopleBrite.MAP)
                 .subscribeOn(Schedulers.io())
@@ -65,69 +67,84 @@ public abstract class BaseDetailFragment extends BaseFragment {
                 .subscribe(new SimpleObserver<PeopleBrite>() {
                     @Override
                     public void onNext(PeopleBrite people) {
-                        View child = inflater.inflate(R.layout.detail_list_item, mLinearCharacters, false);
+                        View child = inflater.inflate(R.layout.detail_list_item, mLinear, false);
                         ((TextView) child.findViewById(R.id.item_name)).setText(people.name());
-                        mLinearCharacters.addView(child);
+                        mLinear.addView(child);
                     }
                 }));
     }
 
-    protected void addFilmsForId(final int id, final LinearLayout mLinearFilms) {
+    protected void addFilmsForId(final int id, final LinearLayout mLinear) {
         subscriptions.add(db.createQuery(Tables.PEOPLE, PeopleBrite.QUERY_GET_PEOPLE_FROM_ID, String.valueOf(id))
-                .map(PeopleBrite.MAP)
+                .map(FilmsBrite.MAP)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SimpleObserver<PeopleBrite>() {
+                .subscribe(new SimpleObserver<FilmsBrite>() {
                     @Override
-                    public void onNext(PeopleBrite people) {
-                        View child = inflater.inflate(R.layout.detail_list_item, mLinearFilms, false);
-                        ((TextView) child.findViewById(R.id.item_name)).setText(people.name());
-                        mLinearFilms.addView(child);
+                    public void onNext(FilmsBrite film) {
+                        View child = inflater.inflate(R.layout.detail_list_item, mLinear, false);
+                        ((TextView) child.findViewById(R.id.item_name)).setText(film.title());
+                        mLinear.addView(child);
                     }
                 }));
     }
 
-    protected void addSpeciesForId(final int id, final LinearLayout mLinearSpecies) {
+    protected void addPlanetsForId(final int id, final LinearLayout mLinearPlanets) {
         subscriptions.add(db.createQuery(Tables.SPECIES, SpeciesBrite.QUERY_SPECIES_FROM_ID, String.valueOf(id))
-                .map(SpeciesBrite.MAP_SPECIESBRITE_UNIQUE)
+                .map(PlanetsBrite.MAP)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SimpleObserver<PlanetsBrite>() {
+                    @Override
+                    public void onNext(PlanetsBrite planet) {
+                        View child = inflater.inflate(R.layout.detail_list_item, mLinearPlanets, false);
+                        ((TextView) child.findViewById(R.id.item_name)).setText(planet.name());
+                        mLinearPlanets.addView(child);
+                    }
+                }));
+    }
+
+    protected void addSpeciesForId(final int id, final LinearLayout mLinear) {
+        subscriptions.add(db.createQuery(Tables.SPECIES, SpeciesBrite.QUERY_SPECIES_FROM_ID, String.valueOf(id))
+                .map(SpeciesBrite.MAP)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SimpleObserver<SpeciesBrite>() {
                     @Override
-                    public void onNext(SpeciesBrite species) {
-                        View child = inflater.inflate(R.layout.detail_list_item, mLinearSpecies, false);
-                        ((TextView) child.findViewById(R.id.item_name)).setText(species.name());
-                        mLinearSpecies.addView(child);
+                    public void onNext(SpeciesBrite object) {
+                        View child = inflater.inflate(R.layout.detail_list_item, mLinear, false);
+                        ((TextView) child.findViewById(R.id.item_name)).setText(object.name());
+                        mLinear.addView(child);
                     }
                 }));
     }
 
-    protected void addStarshipsForId(final int id, final LinearLayout mLinearStarships) {
+    protected void addStarshipsForId(final int id, final LinearLayout mLinear) {
         subscriptions.add(db.createQuery(Tables.STARSHIPS, StarshipsBrite.QUERY_STARSHIPS_FROM_ID, String.valueOf(id))
-                .map(StarshipsBrite.MAP_STARSHIPSBRITE_UNIQUE)
+                .map(StarshipsBrite.MAP)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SimpleObserver<StarshipsBrite>() {
                     @Override
-                    public void onNext(StarshipsBrite species) {
-                        View child = inflater.inflate(R.layout.detail_list_item, mLinearStarships, false);
-                        ((TextView) child.findViewById(R.id.item_name)).setText(species.name());
-                        mLinearStarships.addView(child);
+                    public void onNext(StarshipsBrite object) {
+                        View child = inflater.inflate(R.layout.detail_list_item, mLinear, false);
+                        ((TextView) child.findViewById(R.id.item_name)).setText(object.name());
+                        mLinear.addView(child);
                     }
                 }));
     }
 
-    protected void addVehiclesForId(final int id, final LinearLayout mLinearVehicles) {
+    protected void addVehiclesForId(final int id, final LinearLayout mLinear) {
         subscriptions.add(db.createQuery(Tables.VEHICLES, VehiclesBrite.QUERY_VEHICLES_FROM_ID, String.valueOf(id))
-                .map(VehiclesBrite.MAP_VEHICLES_UNIQUE)
+                .map(VehiclesBrite.MAP)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SimpleObserver<VehiclesBrite>() {
                     @Override
                     public void onNext(VehiclesBrite object) {
-                        View child = inflater.inflate(R.layout.detail_list_item, mLinearVehicles, false);
+                        View child = inflater.inflate(R.layout.detail_list_item, mLinear, false);
                         ((TextView) child.findViewById(R.id.item_name)).setText(object.name());
-                        mLinearVehicles.addView(child);
+                        mLinear.addView(child);
                     }
                 }));
     }

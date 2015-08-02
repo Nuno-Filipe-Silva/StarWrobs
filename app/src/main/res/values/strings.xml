@@ -31,5 +31,15 @@
     <string name="ui_detail_film_producer">Producer</string>
     <string name="ui_detail_film_opening_crawl">Opening crawl</string>
     <string name="ui_card_characters">Characters</string>
+    <string name="ui_detail_planets_name">Name</string>
+    <string name="ui_detail_planets_rotation_period">Rotation period</string>
+    <string name="ui_detail_planets_orbital_period">Orbital period</string>
+    <string name="ui_detail_planets_diameter">Diameter</string>
+    <string name="ui_detail_planets_climate">Climate</string>
+    <string name="ui_detail_planets_gravity">Gravity</string>
+    <string name="ui_detail_planets_terrain">Terrain</string>
+    <string name="ui_detail_planets_surface_water">Surface water</string>
+    <string name="ui_detail_planets_population">Population</string>
+    <string name="ui_card_residents">Residents</string>
 
 </resources>

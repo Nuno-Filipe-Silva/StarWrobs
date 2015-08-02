@@ -31,13 +31,13 @@ public abstract class PlanetsBrite {
             + SWDatabaseContract.CommonColumns.COMMON_ID
             + " = ?";
 
-    public static final Func1<Query, List<PlanetsBrite>> MAP = new Func1<Query, List<PlanetsBrite>>() {
+    public static final Func1<Query, PlanetsBrite> MAP = new Func1<Query, PlanetsBrite>() {
         @Override
-        public List<PlanetsBrite> call(Query query) {
+        public PlanetsBrite call(Query query) {
             Cursor cursor = query.run();
             try {
-                List<PlanetsBrite> values = new ArrayList<>(cursor.getCount());
-                while (cursor.moveToNext()) {
+
+                if (cursor.moveToFirst()) {
                     long id = Db.getLong(cursor, BaseColumns._ID);
                     int objectId = Db.getInt(cursor, CommonColumns.COMMON_ID);
                     String created = Db.getString(cursor, CommonColumns.COMMON_CREATED);
@@ -53,12 +53,12 @@ public abstract class PlanetsBrite {
                     String surfaceWater = Db.getString(cursor, Planet.PLANET_SURFACE_WATER);
                     String population = Db.getString(cursor, Planet.PLANET_POPULATION);
 
-                    values.add(new AutoParcel_PlanetsBrite(id, objectId, created, edited, name, rotationPeriod, orbitalPeriod, diameter, climate, gravity, terrain, surfaceWater, population));
+                    return (new AutoParcel_PlanetsBrite(id, objectId, created, edited, name, rotationPeriod, orbitalPeriod, diameter, climate, gravity, terrain, surfaceWater, population));
                 }
-                return values;
             } finally {
                 cursor.close();
             }
+            return null;
         }
     };
 
