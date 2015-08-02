@@ -25,6 +25,13 @@ public abstract class VehiclesBrite {
             + " FROM " + SWDatabaseContract.Tables.VEHICLES
             + " ORDER BY " + CommonStarshipVehicle.STARSHIP_VEHICLE_NAME + " ASC";
 
+    public static final String QUERY_VEHICLES_FROM_ID = "SELECT * FROM "
+            + SWDatabaseContract.Tables.VEHICLES
+            + " WHERE "
+            + SWDatabaseContract.CommonColumns.COMMON_ID
+            + " = ?";
+
+
     public static final Func1<Query, List<VehiclesBrite>> MAP = new Func1<Query, List<VehiclesBrite>>() {
         @Override
         public List<VehiclesBrite> call(Query query) {

@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.guillaume.starwrobs.data.controller.DataController;
 import com.guillaume.starwrobs.data.database.DbModule;
 import com.guillaume.starwrobs.data.network.ApiModule;
+import com.guillaume.starwrobs.fragments.BaseDetailFragment;
 import com.guillaume.starwrobs.fragments.DetailFilmFragment;
 import com.guillaume.starwrobs.fragments.DetailPeopleFragment;
 import com.guillaume.starwrobs.fragments.SWListFragment;
@@ -27,4 +28,7 @@ public interface AppComponent {
 
     void inject(@NonNull DetailPeopleFragment fragment);
     void inject(@NonNull DetailFilmFragment fragment);
+
+    void inject(@NonNull BaseDetailFragment fragment);
+
 }

@@ -25,6 +25,12 @@ public abstract class PlanetsBrite {
             + " FROM " + SWDatabaseContract.Tables.PLANETS
             + " ORDER BY " + Planet.PLANET_NAME + " ASC";
 
+    public static final String QUERY_PLANET_FROM_ID = "SELECT * FROM "
+            + SWDatabaseContract.Tables.PLANETS
+            + " WHERE "
+            + SWDatabaseContract.CommonColumns.COMMON_ID
+            + " = ?";
+
     public static final Func1<Query, List<PlanetsBrite>> MAP = new Func1<Query, List<PlanetsBrite>>() {
         @Override
         public List<PlanetsBrite> call(Query query) {

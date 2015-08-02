@@ -20,10 +20,16 @@ import static com.squareup.sqlbrite.SqlBrite.Query;
 @AutoParcel
 public abstract class PeopleBrite {
 
-    public static String QUERY = ""
+    public static final String QUERY = ""
             + "SELECT *"
             + " FROM " + SWDatabaseContract.Tables.PEOPLE
             + " ORDER BY " + People.PEOPLE_NAME + " ASC";
+
+    public static final String QUERY_GET_PEOPLE_FROM_ID = "SELECT * FROM "
+            + SWDatabaseContract.Tables.PEOPLE
+            + " WHERE "
+            + SWDatabaseContract.CommonColumns.COMMON_ID
+            + " = ?";
 
     public static final Func1<Query, PeopleBrite> MAP = new Func1<Query, PeopleBrite>() {
         @Override

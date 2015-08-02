@@ -10,15 +10,7 @@ import android.support.annotation.NonNull;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.CommonColumns;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.CommonStarshipVehicle;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.Film;
-import com.guillaume.starwrobs.data.database.SWDatabaseContract.LinkFilmsPlanets;
-import com.guillaume.starwrobs.data.database.SWDatabaseContract.LinkFilmsSpecies;
-import com.guillaume.starwrobs.data.database.SWDatabaseContract.LinkFilmsStarships;
-import com.guillaume.starwrobs.data.database.SWDatabaseContract.LinkFilmsVehicles;
-import com.guillaume.starwrobs.data.database.SWDatabaseContract.LinkPeopleFilms;
-import com.guillaume.starwrobs.data.database.SWDatabaseContract.LinkPeopleSpecies;
-import com.guillaume.starwrobs.data.database.SWDatabaseContract.LinkPeopleStarships;
-import com.guillaume.starwrobs.data.database.SWDatabaseContract.LinkPeopleVehicles;
-import com.guillaume.starwrobs.data.database.SWDatabaseContract.LinkPlanetsPeople;
+import com.guillaume.starwrobs.data.database.SWDatabaseContract.SimpleIds;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.LinkTables;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.People;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.Planet;
@@ -169,8 +161,8 @@ public class SWDatabaseHelper extends SQLiteOpenHelper {
     private static String getCreateLinkPeopleFilmsTableQuery() {
         return "CREATE TABLE " + LinkTables.LINK_PEOPLE_FILMS + " ("
                 + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + LinkPeopleFilms.PEOPLE_ID + TYPE_INTEGER_NOT_NULL + COMMA_SEP
-                + LinkPeopleFilms.FILM_ID + TYPE_INTEGER_NOT_NULL
+                + SimpleIds.PEOPLE_ID + TYPE_INTEGER_NOT_NULL + COMMA_SEP
+                + SimpleIds.FILM_ID + TYPE_INTEGER_NOT_NULL
                 + ")";
     }
 
@@ -178,8 +170,8 @@ public class SWDatabaseHelper extends SQLiteOpenHelper {
     private static String getCreateLinkPeopleSpeciesTableQuery() {
         return "CREATE TABLE " + LinkTables.LINK_PEOPLE_SPECIES + " ("
                 + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + LinkPeopleSpecies.PEOPLE_ID + TYPE_INTEGER_NOT_NULL + COMMA_SEP
-                + LinkPeopleSpecies.SPECIES_ID + TYPE_INTEGER_NOT_NULL
+                + SimpleIds.PEOPLE_ID + TYPE_INTEGER_NOT_NULL + COMMA_SEP
+                + SimpleIds.SPECIES_ID + TYPE_INTEGER_NOT_NULL
                 + ")";
     }
 
@@ -187,8 +179,8 @@ public class SWDatabaseHelper extends SQLiteOpenHelper {
     private static String getCreateLinkPeopleStarshipsTableQuery() {
         return "CREATE TABLE " + LinkTables.LINK_PEOPLE_STARSHIPS + " ("
                 + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + LinkPeopleStarships.PEOPLE_ID + TYPE_INTEGER_NOT_NULL + COMMA_SEP
-                + LinkPeopleStarships.STARSHIP_ID + TYPE_INTEGER_NOT_NULL
+                + SimpleIds.PEOPLE_ID + TYPE_INTEGER_NOT_NULL + COMMA_SEP
+                + SimpleIds.STARSHIPS_ID + TYPE_INTEGER_NOT_NULL
                 + ")";
     }
 
@@ -196,8 +188,8 @@ public class SWDatabaseHelper extends SQLiteOpenHelper {
     private static String getCreateLinkPeopleVehiclesTableQuery() {
         return "CREATE TABLE " + LinkTables.LINK_PEOPLE_VEHICLES + " ("
                 + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + LinkPeopleVehicles.PEOPLE_ID + TYPE_INTEGER_NOT_NULL + COMMA_SEP
-                + LinkPeopleVehicles.VEHICLE_ID + TYPE_INTEGER_NOT_NULL
+                + SimpleIds.PEOPLE_ID + TYPE_INTEGER_NOT_NULL + COMMA_SEP
+                + SimpleIds.VEHICLES_ID + TYPE_INTEGER_NOT_NULL
                 + ")";
     }
 
@@ -205,8 +197,8 @@ public class SWDatabaseHelper extends SQLiteOpenHelper {
     private static String getCreateLinkFilmsPlanetTableQuery() {
         return "CREATE TABLE " + LinkTables.LINK_FILMS_PLANETS + " ("
                 + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + LinkFilmsPlanets.FILM_ID + TYPE_INTEGER_NOT_NULL + COMMA_SEP
-                + LinkFilmsPlanets.PLANETS_ID + TYPE_INTEGER_NOT_NULL
+                + SimpleIds.FILM_ID + TYPE_INTEGER_NOT_NULL + COMMA_SEP
+                + SimpleIds.PLANETS_ID + TYPE_INTEGER_NOT_NULL
                 + ")";
     }
 
@@ -214,8 +206,8 @@ public class SWDatabaseHelper extends SQLiteOpenHelper {
     private static String getCreateLinkFilmsSpeciesTableQuery() {
         return "CREATE TABLE " + LinkTables.LINK_FILMS_SPECIES + " ("
                 + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + LinkFilmsSpecies.FILM_ID + TYPE_INTEGER_NOT_NULL + COMMA_SEP
-                + LinkFilmsSpecies.SPECIES_ID + TYPE_INTEGER_NOT_NULL
+                + SimpleIds.FILM_ID + TYPE_INTEGER_NOT_NULL + COMMA_SEP
+                + SimpleIds.SPECIES_ID + TYPE_INTEGER_NOT_NULL
                 + ")";
     }
 
@@ -223,8 +215,8 @@ public class SWDatabaseHelper extends SQLiteOpenHelper {
     private static String getCreateLinkFilmsStarshipsTableQuery() {
         return "CREATE TABLE " + LinkTables.LINK_FILMS_STARSHIPS + " ("
                 + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + LinkFilmsStarships.FILM_ID + TYPE_INTEGER_NOT_NULL + COMMA_SEP
-                + LinkFilmsStarships.STARSHIPS_ID + TYPE_INTEGER_NOT_NULL
+                + SimpleIds.FILM_ID + TYPE_INTEGER_NOT_NULL + COMMA_SEP
+                + SimpleIds.STARSHIPS_ID + TYPE_INTEGER_NOT_NULL
                 + ")";
     }
 
@@ -232,8 +224,8 @@ public class SWDatabaseHelper extends SQLiteOpenHelper {
     private static String getCreateLinkFilmsVehiclesTableQuery() {
         return "CREATE TABLE " + LinkTables.LINK_FILMS_VEHICLES + " ("
                 + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + LinkFilmsVehicles.FILM_ID + TYPE_INTEGER_NOT_NULL + COMMA_SEP
-                + LinkFilmsVehicles.VEHICLES_ID + TYPE_INTEGER_NOT_NULL
+                + SimpleIds.FILM_ID + TYPE_INTEGER_NOT_NULL + COMMA_SEP
+                + SimpleIds.VEHICLES_ID + TYPE_INTEGER_NOT_NULL
                 + ")";
     }
 
@@ -241,8 +233,8 @@ public class SWDatabaseHelper extends SQLiteOpenHelper {
     private static String getCreateLinkPlanetsPeopleTableQuery() {
         return "CREATE TABLE " + LinkTables.LINK_PLANETS_PEOPLE + " ("
                 + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + LinkPlanetsPeople.PLANET_ID + TYPE_INTEGER_NOT_NULL + COMMA_SEP
-                + LinkPlanetsPeople.PEOPLE_ID + TYPE_INTEGER_NOT_NULL
+                + SimpleIds.PLANETS_ID + TYPE_INTEGER_NOT_NULL + COMMA_SEP
+                + SimpleIds.PEOPLE_ID + TYPE_INTEGER_NOT_NULL
                 + ")";
     }
 

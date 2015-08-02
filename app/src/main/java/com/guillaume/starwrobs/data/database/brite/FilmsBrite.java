@@ -25,6 +25,12 @@ public abstract class FilmsBrite {
             + " FROM " + SWDatabaseContract.Tables.FILMS
             + " ORDER BY " + Film.FILM_EPISODE_ID + " ASC";
 
+    public static final String QUERY_FILM_FROM_ID = "SELECT * FROM "
+            + SWDatabaseContract.Tables.FILMS
+            + " WHERE "
+            + SWDatabaseContract.Film.FILM_EPISODE_ID
+            + " = ?";
+
     public static final Func1<Query, FilmsBrite> MAP = new Func1<Query, FilmsBrite>() {
         @Override
         public FilmsBrite call(Query query) {

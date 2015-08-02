@@ -25,6 +25,12 @@ public abstract class SpeciesBrite {
             + " FROM " + SWDatabaseContract.Tables.SPECIES
             + " ORDER BY " + Species.SPECIES_NAME + " ASC";
 
+    public static final String QUERY_SPECIES_FROM_ID = "SELECT * FROM "
+            + SWDatabaseContract.Tables.SPECIES
+            + " WHERE "
+            + SWDatabaseContract.CommonColumns.COMMON_ID
+            + " = ?";
+
     public static final Func1<Query, List<SpeciesBrite>> MAP = new Func1<Query, List<SpeciesBrite>>() {
         @Override
         public List<SpeciesBrite> call(Query query) {

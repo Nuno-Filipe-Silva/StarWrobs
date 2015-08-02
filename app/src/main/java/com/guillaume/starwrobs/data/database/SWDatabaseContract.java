@@ -87,49 +87,13 @@ public class SWDatabaseContract {
         String STARSHIP_VEHICLE_CLASS = "class";
     }
 
-    public interface LinkPeopleFilms {
+    public interface SimpleIds {
         String PEOPLE_ID = "people_id";
-        String FILM_ID = "film_id";
-    }
-
-    public interface LinkPeopleSpecies {
-        String PEOPLE_ID = "people_id";
-        String SPECIES_ID = "species_id";
-    }
-
-    public interface LinkPeopleStarships {
-        String PEOPLE_ID = "people_id";
-        String STARSHIP_ID = "starship_id";
-    }
-
-    public interface LinkPeopleVehicles {
-        String PEOPLE_ID = "people_id";
-        String VEHICLE_ID = "vehicle_id";
-    }
-
-    public interface LinkFilmsPlanets {
         String FILM_ID = "film_id";
         String PLANETS_ID = "planets_id";
-    }
-
-    public interface LinkFilmsStarships {
-        String FILM_ID = "film_id";
-        String STARSHIPS_ID = "starships_id";
-    }
-
-    public interface LinkFilmsSpecies {
-        String FILM_ID = "film_id";
         String SPECIES_ID = "species_id";
-    }
-
-    public interface LinkFilmsVehicles {
-        String FILM_ID = "film_id";
+        String STARSHIPS_ID = "starship_id";
         String VEHICLES_ID = "vehicles_id";
-    }
-
-    public interface LinkPlanetsPeople {
-        String PLANET_ID = "planet_id";
-        String PEOPLE_ID = "people_id";
     }
 
 
