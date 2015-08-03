@@ -3,12 +3,10 @@ package com.guillaume.starwrobs.fragments;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.guillaume.starwrobs.R;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.LinkTables;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.Tables;
-import com.guillaume.starwrobs.data.database.brite.FilmsBrite;
 import com.guillaume.starwrobs.data.database.brite.PlanetsBrite;
 import com.guillaume.starwrobs.data.database.brite.QueryLinkTables;
 import com.guillaume.starwrobs.util.SimpleObserver;

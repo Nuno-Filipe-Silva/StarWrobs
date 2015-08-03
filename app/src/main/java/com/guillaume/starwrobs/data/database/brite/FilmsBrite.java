@@ -20,17 +20,11 @@ import static com.squareup.sqlbrite.SqlBrite.Query;
 @AutoParcel
 public abstract class FilmsBrite {
 
-    public static String QUERY = ""
-            + "SELECT *"
-            + " FROM " + SWDatabaseContract.Tables.FILMS
-            + " ORDER BY " + Film.FILM_EPISODE_ID + " ASC";
-
     public static final String QUERY_FILM_FROM_ID = "SELECT * FROM "
             + SWDatabaseContract.Tables.FILMS
             + " WHERE "
             + SWDatabaseContract.Film.FILM_EPISODE_ID
             + " = ?";
-
     public static final Func1<Query, FilmsBrite> MAP = new Func1<Query, FilmsBrite>() {
         @Override
         public FilmsBrite call(Query query) {
@@ -58,7 +52,6 @@ public abstract class FilmsBrite {
             return null;
         }
     };
-
     public static final Func1<Query, List<SimpleGenericObjectForRecyclerview>> MAP_STRING = new Func1<Query, List<SimpleGenericObjectForRecyclerview>>() {
         @Override
         public List<SimpleGenericObjectForRecyclerview> call(Query query) {
@@ -77,7 +70,6 @@ public abstract class FilmsBrite {
             }
         }
     };
-
     public static final Func1<Query, FilmsBrite> MAP_FILMSBRITE_UNIQUE = new Func1<Query, FilmsBrite>() {
         @Override
         public FilmsBrite call(Query query) {
@@ -106,6 +98,10 @@ public abstract class FilmsBrite {
             return null;
         }
     };
+    public static String QUERY = ""
+            + "SELECT *"
+            + " FROM " + SWDatabaseContract.Tables.FILMS
+            + " ORDER BY " + Film.FILM_EPISODE_ID + " ASC";
 
     public abstract long id();
 

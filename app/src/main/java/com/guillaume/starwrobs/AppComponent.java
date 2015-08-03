@@ -24,9 +24,11 @@ import dagger.Component;
 )
 public interface AppComponent {
     void inject(@NonNull SWListFragment fragment);
+
     void inject(@NonNull DataController dataController);
 
     void inject(@NonNull DetailPeopleFragment fragment);
+
     void inject(@NonNull DetailFilmFragment fragment);
 
     void inject(@NonNull BaseDetailFragment fragment);

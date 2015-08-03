@@ -21,16 +21,16 @@
                 android:id="@+id/card_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
                 android:addStatesFromChildren="true"
+                android:background="?attr/selectableItemBackground"
                 android:padding="@dimen/spacing_major">
 
                 <TextView
                     android:id="@+id/textview_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/spacing_micro"
                     android:layout_gravity="left|center_vertical"
+                    android:layout_marginRight="@dimen/spacing_micro"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
             </FrameLayout>

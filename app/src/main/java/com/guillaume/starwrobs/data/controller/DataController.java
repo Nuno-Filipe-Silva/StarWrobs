@@ -6,13 +6,11 @@ import android.content.Context;
 
 import com.guillaume.starwrobs.SWApplication;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract;
-import com.guillaume.starwrobs.data.database.SWDatabaseContract.SimpleIds;
-import com.guillaume.starwrobs.data.database.SWDatabaseContract.Tables;
-import com.guillaume.starwrobs.data.database.SWDatabaseContract.LinkTables;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.CommonColumns;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.CommonStarshipVehicle;
-
-
+import com.guillaume.starwrobs.data.database.SWDatabaseContract.LinkTables;
+import com.guillaume.starwrobs.data.database.SWDatabaseContract.SimpleIds;
+import com.guillaume.starwrobs.data.database.SWDatabaseContract.Tables;
 import com.guillaume.starwrobs.data.network.ApiManager;
 import com.guillaume.starwrobs.data.network.model.Film;
 import com.guillaume.starwrobs.data.network.model.People;
@@ -238,7 +236,7 @@ public class DataController {
             values.clear();
             values.put(SimpleIds.PEOPLE_ID, id);
             values.put(SimpleIds.FILM_ID, SWFunctions.getIdFromUrl(people.films.get(i)));
-            mDatabase.insert(LinkTables.LINK_PEOPLE_FILMS,values);
+            mDatabase.insert(LinkTables.LINK_PEOPLE_FILMS, values);
         }
 
         nbOfIterations = people.species.size();
@@ -357,7 +355,7 @@ public class DataController {
         values.put(SWDatabaseContract.Species.SPECIES_HAIR_COLORS, species.hair_colors);
         values.put(SWDatabaseContract.Species.SPECIES_EYE_COLORS, species.eye_colors);
         values.put(SWDatabaseContract.Species.SPECIES_AVERAGE_LIFESPAN, species.average_lifespan);
-        if(species.homeworld != null) {
+        if (species.homeworld != null) {
             values.put(SWDatabaseContract.Species.SPECIES_HOMEWORLD, SWFunctions.getIdFromUrl(species.homeworld));
         }
         values.put(SWDatabaseContract.Species.SPECIES_LANGUAGE, species.language);

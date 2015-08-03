@@ -8,7 +8,6 @@ import com.guillaume.starwrobs.R;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.LinkTables;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.Tables;
 import com.guillaume.starwrobs.data.database.brite.QueryLinkTables;
-import com.guillaume.starwrobs.data.database.brite.StarshipsBrite;
 import com.guillaume.starwrobs.data.database.brite.VehiclesBrite;
 import com.guillaume.starwrobs.util.SimpleObserver;
 import com.guillaume.starwrobs.widget.DetailInfoLayout;

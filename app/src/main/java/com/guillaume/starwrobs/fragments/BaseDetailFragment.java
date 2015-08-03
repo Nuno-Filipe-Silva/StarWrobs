@@ -30,16 +30,16 @@ import rx.subscriptions.CompositeSubscription;
 
 public abstract class BaseDetailFragment extends BaseFragment {
 
-    @Inject
-    BriteDatabase db;
-
     protected static final String KEY_ID = "id";
     protected static final String TAG_UNKNOWN = "unknown";
     protected CompositeSubscription subscriptions;
     protected int objectId;
     protected LayoutInflater inflater;
+    @Inject
+    BriteDatabase db;
 
-    @Override public void onAttach(Activity activity) {
+    @Override
+    public void onAttach(Activity activity) {
         super.onAttach(activity);
 
         SWApplication.get(getActivity()).appComponent().inject(this);
@@ -49,7 +49,8 @@ public abstract class BaseDetailFragment extends BaseFragment {
     }
 
 
-    @Override public void onPause() {
+    @Override
+    public void onPause() {
         super.onPause();
         subscriptions.unsubscribe();
     }

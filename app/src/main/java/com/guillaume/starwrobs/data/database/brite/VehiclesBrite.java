@@ -20,23 +20,17 @@ import static com.squareup.sqlbrite.SqlBrite.Query;
 @AutoParcel
 public abstract class VehiclesBrite {
 
-    public static String QUERY = ""
-            + "SELECT *"
-            + " FROM " + SWDatabaseContract.Tables.VEHICLES
-            + " ORDER BY " + CommonStarshipVehicle.STARSHIP_VEHICLE_NAME + " ASC";
-
     public static final String QUERY_VEHICLES_FROM_ID = "SELECT * FROM "
             + SWDatabaseContract.Tables.VEHICLES
             + " WHERE "
             + SWDatabaseContract.CommonColumns.COMMON_ID
             + " = ?";
-
-
     public static final Func1<Query, VehiclesBrite> MAP = new Func1<Query, VehiclesBrite>() {
         @Override
         public VehiclesBrite call(Query query) {
             Cursor cursor = query.run();
-            try {if (cursor.moveToFirst()) {
+            try {
+                if (cursor.moveToFirst()) {
                     long id = Db.getLong(cursor, BaseColumns._ID);
                     int objectId = Db.getInt(cursor, CommonColumns.COMMON_ID);
                     String created = Db.getString(cursor, CommonColumns.COMMON_CREATED);
@@ -54,7 +48,7 @@ public abstract class VehiclesBrite {
                     String consumables = Db.getString(cursor, CommonStarshipVehicle.STARSHIP_VEHICLE_CONSUMABLES);
                     String objectClass = Db.getString(cursor, CommonStarshipVehicle.STARSHIP_VEHICLE_CLASS);
 
-                    return(new AutoParcel_VehiclesBrite(id, objectId, created, edited, name, model, manufacturer, costInCredits, length, maxAtmospheringSpeed, crew, passengers, cargoCapacity, consumables, objectClass));
+                    return (new AutoParcel_VehiclesBrite(id, objectId, created, edited, name, model, manufacturer, costInCredits, length, maxAtmospheringSpeed, crew, passengers, cargoCapacity, consumables, objectClass));
                 }
             } finally {
                 cursor.close();
@@ -62,7 +56,6 @@ public abstract class VehiclesBrite {
             return null;
         }
     };
-
     public static final Func1<Query, List<SimpleGenericObjectForRecyclerview>> MAP_STRING = new Func1<Query, List<SimpleGenericObjectForRecyclerview>>() {
         @Override
         public List<SimpleGenericObjectForRecyclerview> call(Query query) {
@@ -80,6 +73,10 @@ public abstract class VehiclesBrite {
             }
         }
     };
+    public static String QUERY = ""
+            + "SELECT *"
+            + " FROM " + SWDatabaseContract.Tables.VEHICLES
+            + " ORDER BY " + CommonStarshipVehicle.STARSHIP_VEHICLE_NAME + " ASC";
 
     public abstract long id();
 

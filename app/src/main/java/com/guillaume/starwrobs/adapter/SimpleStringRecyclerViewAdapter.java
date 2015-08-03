@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import com.guillaume.starwrobs.R;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import butterknife.Bind;
@@ -26,15 +24,14 @@ public class SimpleStringRecyclerViewAdapter extends
     private List<String> mValues;
 
 
-
-    public String getValueAt(int position) {
-        return mValues.get(position);
-    }
-
     public SimpleStringRecyclerViewAdapter(Context context, List<String> list) {
         context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
         mBackground = mTypedValue.resourceId;
         mValues = list;
+    }
+
+    public String getValueAt(int position) {
+        return mValues.get(position);
     }
 
     @Override
@@ -63,10 +60,8 @@ public class SimpleStringRecyclerViewAdapter extends
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public String mBoundString;
-
         public final View mView;
-
+        public String mBoundString;
         @Bind(R.id.item_name)
         TextView mTextView;
 

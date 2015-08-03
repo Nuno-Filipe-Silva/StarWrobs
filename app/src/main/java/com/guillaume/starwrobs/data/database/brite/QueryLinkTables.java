@@ -3,8 +3,8 @@ package com.guillaume.starwrobs.data.database.brite;
 import android.database.Cursor;
 
 import com.guillaume.starwrobs.data.database.Db;
-import com.guillaume.starwrobs.data.database.SWDatabaseContract.SimpleIds;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.LinkTables;
+import com.guillaume.starwrobs.data.database.SWDatabaseContract.SimpleIds;
 import com.squareup.sqlbrite.SqlBrite;
 
 import java.util.ArrayList;

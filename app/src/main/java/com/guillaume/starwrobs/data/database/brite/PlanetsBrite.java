@@ -20,17 +20,11 @@ import static com.squareup.sqlbrite.SqlBrite.Query;
 @AutoParcel
 public abstract class PlanetsBrite {
 
-    public static String QUERY = ""
-            + "SELECT *"
-            + " FROM " + SWDatabaseContract.Tables.PLANETS
-            + " ORDER BY " + Planet.PLANET_NAME + " ASC";
-
     public static final String QUERY_PLANET_FROM_ID = "SELECT * FROM "
             + SWDatabaseContract.Tables.PLANETS
             + " WHERE "
             + SWDatabaseContract.CommonColumns.COMMON_ID
             + " = ?";
-
     public static final Func1<Query, PlanetsBrite> MAP = new Func1<Query, PlanetsBrite>() {
         @Override
         public PlanetsBrite call(Query query) {
@@ -61,7 +55,6 @@ public abstract class PlanetsBrite {
             return null;
         }
     };
-
     public static final Func1<Query, List<SimpleGenericObjectForRecyclerview>> MAP_STRING = new Func1<Query, List<SimpleGenericObjectForRecyclerview>>() {
         @Override
         public List<SimpleGenericObjectForRecyclerview> call(Query query) {
@@ -79,7 +72,6 @@ public abstract class PlanetsBrite {
             }
         }
     };
-
     public static final Func1<Query, SimpleGenericObjectForRecyclerview> MAP_STRING_UNIQUE = new Func1<Query, SimpleGenericObjectForRecyclerview>() {
         @Override
         public SimpleGenericObjectForRecyclerview call(Query query) {
@@ -96,6 +88,10 @@ public abstract class PlanetsBrite {
             return null;
         }
     };
+    public static String QUERY = ""
+            + "SELECT *"
+            + " FROM " + SWDatabaseContract.Tables.PLANETS
+            + " ORDER BY " + Planet.PLANET_NAME + " ASC";
 
     public abstract long id();
 

@@ -20,17 +20,11 @@ import static com.squareup.sqlbrite.SqlBrite.Query;
 @AutoParcel
 public abstract class SpeciesBrite {
 
-    public static String QUERY = ""
-            + "SELECT *"
-            + " FROM " + SWDatabaseContract.Tables.SPECIES
-            + " ORDER BY " + Species.SPECIES_NAME + " ASC";
-
     public static final String QUERY_SPECIES_FROM_ID = "SELECT * FROM "
             + SWDatabaseContract.Tables.SPECIES
             + " WHERE "
             + SWDatabaseContract.CommonColumns.COMMON_ID
             + " = ?";
-
     public static final Func1<Query, SpeciesBrite> MAP = new Func1<Query, SpeciesBrite>() {
         @Override
         public SpeciesBrite call(Query query) {
@@ -53,7 +47,7 @@ public abstract class SpeciesBrite {
                     int homeworld = Db.getInt(cursor, Species.SPECIES_HOMEWORLD);
                     String language = Db.getString(cursor, Species.SPECIES_LANGUAGE);
 
-                    return(new AutoParcel_SpeciesBrite(id, objectId, created, edited, name, classification, designation, averageHeight, skinColors, hairColors, eyeColors, averageLifespan, homeworld, language));
+                    return (new AutoParcel_SpeciesBrite(id, objectId, created, edited, name, classification, designation, averageHeight, skinColors, hairColors, eyeColors, averageLifespan, homeworld, language));
                 }
             } finally {
                 cursor.close();
@@ -61,7 +55,6 @@ public abstract class SpeciesBrite {
             return null;
         }
     };
-
     public static final Func1<Query, List<SimpleGenericObjectForRecyclerview>> MAP_STRING = new Func1<Query, List<SimpleGenericObjectForRecyclerview>>() {
         @Override
         public List<SimpleGenericObjectForRecyclerview> call(Query query) {
@@ -79,6 +72,10 @@ public abstract class SpeciesBrite {
             }
         }
     };
+    public static String QUERY = ""
+            + "SELECT *"
+            + " FROM " + SWDatabaseContract.Tables.SPECIES
+            + " ORDER BY " + Species.SPECIES_NAME + " ASC";
 
     public abstract long id();
 

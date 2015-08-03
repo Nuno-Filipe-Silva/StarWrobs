@@ -77,12 +77,10 @@ public class ReactiveGenericRecyclerViewAdapter
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        public String mBoundString;
         @Bind(R.id.item_name)
         TextView mTextView;
-
         View mView;
-
-        public String mBoundString;
 
         public ViewHolder(View view) {
             super(view);

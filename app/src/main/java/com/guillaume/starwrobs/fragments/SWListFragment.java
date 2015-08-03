@@ -40,17 +40,13 @@ public class SWListFragment extends BaseFragment {
     public static final int KEY_SPECIES = 4;
     public static final int KEY_STARSHIPS = 5;
     public static final int KEY_VEHICLES = 6;
-
+    @Bind(R.id.recyclerview)
+    RecyclerView mRecyclerView;
+    @Inject
+    BriteDatabase db;
     private int mCategoryId = -1;
     private Subscription subscription;
     private ReactiveGenericRecyclerViewAdapter adapter;
-
-
-    @Bind(R.id.recyclerview)
-    RecyclerView mRecyclerView;
-
-    @Inject
-    BriteDatabase db;
 
     /**
      * Empty constructor as per the fragment documentation
@@ -90,7 +86,8 @@ public class SWListFragment extends BaseFragment {
     }
 
 
-    @Override public void onResume() {
+    @Override
+    public void onResume() {
         super.onResume();
 
         String table = "";
@@ -129,7 +126,6 @@ public class SWListFragment extends BaseFragment {
                 map = VehiclesBrite.MAP_STRING;
                 break;
         }
-
 
 
         subscription = db.createQuery(table, query)

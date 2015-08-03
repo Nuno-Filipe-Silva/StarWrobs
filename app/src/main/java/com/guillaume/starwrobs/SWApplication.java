@@ -43,7 +43,8 @@ public class SWApplication extends Application {
                 .build();
     }
 
-    @Override public void onCreate() {
+    @Override
+    public void onCreate() {
         super.onCreate();
 
         if (BuildConfig.DEBUG) {
