@@ -10,6 +10,9 @@ import com.guillaume.starwrobs.R;
 import com.guillaume.starwrobs.fragments.DetailFilmFragment;
 import com.guillaume.starwrobs.fragments.DetailPeopleFragment;
 import com.guillaume.starwrobs.fragments.DetailPlanetsFragment;
+import com.guillaume.starwrobs.fragments.DetailSpeciesFragment;
+import com.guillaume.starwrobs.fragments.DetailStarshipsFragment;
+import com.guillaume.starwrobs.fragments.DetailVehiclesFragment;
 import com.guillaume.starwrobs.fragments.SWListFragment;
 
 import butterknife.Bind;
@@ -76,12 +79,15 @@ public class DetailActivity extends BaseActivity {
                 fragment = DetailPlanetsFragment.newInstance(objectId);
                 break;
             case (SWListFragment.KEY_SPECIES):
+                fragment = DetailSpeciesFragment.newInstance(objectId);
                 resId = R.drawable.species;
                 break;
             case (SWListFragment.KEY_VEHICLES):
+                fragment = DetailVehiclesFragment.newInstance(objectId);
                 resId = R.drawable.vehicles;
                 break;
             case (SWListFragment.KEY_STARSHIPS):
+                fragment = DetailStarshipsFragment.newInstance(objectId);
                 resId = R.drawable.starships;
                 break;
         }

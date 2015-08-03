@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.guillaume.starwrobs.widget.DetailCardLayout
+        android:id="@+id/cardDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_major"
+        app:title="@string/ui_details_title">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/spacing_major"
+            android:paddingRight="@dimen/spacing_major"
+            android:paddingBottom="@dimen/spacing_major">
+
+            <com.guillaume.starwrobs.widget.DetailInfoLayout
+                android:id="@+id/layout_info_vehicles_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                app:title="@string/ui_detail_vehicles_name" />
+
+            <com.guillaume.starwrobs.widget.DetailInfoLayout
+                android:id="@+id/layout_info_vehicles_model"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                app:title="@string/ui_detail_vehicles_model" />
+
+            <com.guillaume.starwrobs.widget.DetailInfoLayout
+                android:id="@+id/layout_info_vehicles_manufacturer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                app:title="@string/ui_detail_vehicles_manufacturer" />
+
+            <com.guillaume.starwrobs.widget.DetailInfoLayout
+                android:id="@+id/layout_info_vehicles_cost_in_credits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                app:title="@string/ui_detail_vehicles_cost_in_credits" />
+
+            <com.guillaume.starwrobs.widget.DetailInfoLayout
+                android:id="@+id/layout_info_vehicles_length"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                app:title="@string/ui_detail_vehicles_length" />
+
+            <com.guillaume.starwrobs.widget.DetailInfoLayout
+                android:id="@+id/layout_info_vehicles_max_atmosphering_speed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                app:title="@string/ui_detail_vehicles_max_atmosphering_speed" />
+
+            <com.guillaume.starwrobs.widget.DetailInfoLayout
+                android:id="@+id/layout_info_vehicles_crew"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                app:title="@string/ui_detail_vehicles_crew" />
+
+            <com.guillaume.starwrobs.widget.DetailInfoLayout
+                android:id="@+id/layout_info_vehicles_passengers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                app:title="@string/ui_detail_vehicles_passengers" />
+
+            <com.guillaume.starwrobs.widget.DetailInfoLayout
+                android:id="@+id/layout_info_vehicles_cargo_capacity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                app:title="@string/ui_detail_vehicles_cargo_capacity" />
+
+            <com.guillaume.starwrobs.widget.DetailInfoLayout
+                android:id="@+id/layout_info_vehicles_consumables"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                app:title="@string/ui_detail_vehicles_consumables" />
+
+            <com.guillaume.starwrobs.widget.DetailInfoLayout
+                android:id="@+id/layout_info_vehicles_class"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                app:title="@string/ui_detail_vehicles_class" />
+
+        </LinearLayout>
+
+    </com.guillaume.starwrobs.widget.DetailCardLayout>
+
+    <com.guillaume.starwrobs.widget.DetailCardLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_major"
+        app:title="@string/ui_card_pilots">
+
+        <LinearLayout
+            android:id="@+id/cardPilots"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/spacing_major"
+            android:paddingRight="@dimen/spacing_major"
+            android:paddingBottom="@dimen/spacing_major"/>
+
+    </com.guillaume.starwrobs.widget.DetailCardLayout>
+
+    <com.guillaume.starwrobs.widget.DetailCardLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_major"
+        app:title="@string/ui_tab_films">
+
+        <LinearLayout
+            android:id="@+id/cardFilms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/spacing_major"
+            android:paddingRight="@dimen/spacing_major"
+            android:paddingBottom="@dimen/spacing_major"/>
+
+    </com.guillaume.starwrobs.widget.DetailCardLayout>
+
+</LinearLayout>

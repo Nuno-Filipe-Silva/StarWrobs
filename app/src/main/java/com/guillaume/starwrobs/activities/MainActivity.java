@@ -1,5 +1,6 @@
 package com.guillaume.starwrobs.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -55,6 +56,9 @@ public class MainActivity extends BaseActivity {
                 return true;
             case R.id.action_delete_data:
                 new DataController(getApplicationContext()).deleteDatabase();
+                return true;
+            case R.id.action_show_licenses:
+                startActivity(new Intent(MainActivity.this, LicensesActivity.class));
                 return true;
         }
         return super.onOptionsItemSelected(item);

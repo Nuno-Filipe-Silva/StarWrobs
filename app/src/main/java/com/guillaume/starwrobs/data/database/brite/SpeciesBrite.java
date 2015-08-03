@@ -50,7 +50,7 @@ public abstract class SpeciesBrite {
                     String hairColors = Db.getString(cursor, Species.SPECIES_HAIR_COLORS);
                     String eyeColors = Db.getString(cursor, Species.SPECIES_EYE_COLORS);
                     String averageLifespan = Db.getString(cursor, Species.SPECIES_AVERAGE_LIFESPAN);
-                    String homeworld = Db.getString(cursor, Species.SPECIES_HOMEWORLD);
+                    int homeworld = Db.getInt(cursor, Species.SPECIES_HOMEWORLD);
                     String language = Db.getString(cursor, Species.SPECIES_LANGUAGE);
 
                     return(new AutoParcel_SpeciesBrite(id, objectId, created, edited, name, classification, designation, averageHeight, skinColors, hairColors, eyeColors, averageLifespan, homeworld, language));
@@ -104,7 +104,7 @@ public abstract class SpeciesBrite {
 
     public abstract String averageLifespan();
 
-    public abstract String homeworld();
+    public abstract int homeworld();
 
     public abstract String language();
 
@@ -150,7 +150,7 @@ public abstract class SpeciesBrite {
             return this;
         }
 
-        public Builder homeworld(String value) {
+        public Builder homeworld(int value) {
             values.put(Species.SPECIES_HOMEWORLD, value);
             return this;
         }

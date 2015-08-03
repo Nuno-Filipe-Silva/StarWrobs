@@ -14,10 +14,12 @@ import com.guillaume.starwrobs.data.database.SWDatabaseContract.Tables;
 import com.guillaume.starwrobs.data.database.brite.FilmsBrite;
 import com.guillaume.starwrobs.data.database.brite.PeopleBrite;
 import com.guillaume.starwrobs.data.database.brite.PlanetsBrite;
+import com.guillaume.starwrobs.data.database.brite.SimpleGenericObjectForRecyclerview;
 import com.guillaume.starwrobs.data.database.brite.SpeciesBrite;
 import com.guillaume.starwrobs.data.database.brite.StarshipsBrite;
 import com.guillaume.starwrobs.data.database.brite.VehiclesBrite;
 import com.guillaume.starwrobs.util.SimpleObserver;
+import com.guillaume.starwrobs.widget.DetailInfoLayout;
 import com.squareup.sqlbrite.BriteDatabase;
 
 import javax.inject.Inject;
@@ -25,7 +27,6 @@ import javax.inject.Inject;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
-import timber.log.Timber;
 
 public abstract class BaseDetailFragment extends BaseFragment {
 
@@ -44,11 +45,6 @@ public abstract class BaseDetailFragment extends BaseFragment {
         SWApplication.get(getActivity()).appComponent().inject(this);
         objectId = getArguments().getInt(KEY_ID);
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    }
-
-    @Override public void onResume() {
-        super.onResume();
-
         subscriptions = new CompositeSubscription();
     }
 
@@ -75,7 +71,7 @@ public abstract class BaseDetailFragment extends BaseFragment {
     }
 
     protected void addFilmsForId(final int id, final LinearLayout mLinear) {
-        subscriptions.add(db.createQuery(Tables.PEOPLE, PeopleBrite.QUERY_GET_PEOPLE_FROM_ID, String.valueOf(id))
+        subscriptions.add(db.createQuery(Tables.FILMS, FilmsBrite.QUERY_FILM_FROM_ID, String.valueOf(id))
                 .map(FilmsBrite.MAP)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -90,7 +86,7 @@ public abstract class BaseDetailFragment extends BaseFragment {
     }
 
     protected void addPlanetsForId(final int id, final LinearLayout mLinearPlanets) {
-        subscriptions.add(db.createQuery(Tables.SPECIES, SpeciesBrite.QUERY_SPECIES_FROM_ID, String.valueOf(id))
+        subscriptions.add(db.createQuery(Tables.PLANETS, PlanetsBrite.QUERY_PLANET_FROM_ID, String.valueOf(id))
                 .map(PlanetsBrite.MAP)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -147,6 +143,25 @@ public abstract class BaseDetailFragment extends BaseFragment {
                         mLinear.addView(child);
                     }
                 }));
+    }
+
+    protected void getHomeworld(final int homeworldId, final DetailInfoLayout mHomeworld) {
+        subscriptions.add(db.createQuery(Tables.PLANETS, PlanetsBrite.QUERY_PLANET_FROM_ID, String.valueOf(homeworldId))
+                .map(PlanetsBrite.MAP_STRING_UNIQUE)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SimpleObserver<SimpleGenericObjectForRecyclerview>() {
+                    @Override
+                    public void onNext(SimpleGenericObjectForRecyclerview planet) {
+                        mHomeworld.setContentText(planet.name);
+                    }
+                }));
+    }
+
+    protected void setEmptyDescription(final LinearLayout ll) {
+        View child = inflater.inflate(R.layout.detail_list_item, ll, false);
+        ((TextView) child.findViewById(R.id.item_name)).setText(getString(R.string.ui_card_empty_description));
+        ll.addView(child);
     }
 
 }

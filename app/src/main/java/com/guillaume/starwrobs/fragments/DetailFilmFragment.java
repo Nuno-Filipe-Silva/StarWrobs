@@ -1,6 +1,7 @@
 package com.guillaume.starwrobs.fragments;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -67,8 +68,8 @@ public class DetailFilmFragment extends BaseDetailFragment {
 
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         subscriptions.add(db.createQuery(Tables.FILMS, FilmsBrite.QUERY_FILM_FROM_ID, String.valueOf(objectId))
                 .map(FilmsBrite.MAP)
@@ -95,8 +96,13 @@ public class DetailFilmFragment extends BaseDetailFragment {
                 .subscribe(new SimpleObserver<List<Integer>>() {
                     @Override
                     public void onNext(List<Integer> list) {
-                        for (int i = 0; i < list.size(); i++) {
-                            addPeopleForId(list.get(i), mLinearCharacters);
+                        int upperBound = list.size();
+                        if (upperBound == 0) {
+                            setEmptyDescription(mLinearCharacters);
+                        } else {
+                            for (int i = 0; i < upperBound; i++) {
+                                addPeopleForId(list.get(i), mLinearCharacters);
+                            }
                         }
                     }
                 }));
@@ -107,9 +113,14 @@ public class DetailFilmFragment extends BaseDetailFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SimpleObserver<List<Integer>>() {
                     @Override
-                    public void onNext(List<Integer> species) {
-                        for (int i = 0; i < species.size(); i++) {
-                            addSpeciesForId(species.get(i), mLinearSpecies);
+                    public void onNext(List<Integer> list) {
+                        int upperBound = list.size();
+                        if (upperBound == 0) {
+                            setEmptyDescription(mLinearSpecies);
+                        } else {
+                            for (int i = 0; i < upperBound; i++) {
+                                addSpeciesForId(list.get(i), mLinearSpecies);
+                            }
                         }
                     }
                 }));
@@ -120,9 +131,14 @@ public class DetailFilmFragment extends BaseDetailFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SimpleObserver<List<Integer>>() {
                     @Override
-                    public void onNext(List<Integer> species) {
-                        for (int i = 0; i < species.size(); i++) {
-                            addPlanetsForId(species.get(i), mLinearPlanets);
+                    public void onNext(List<Integer> list) {
+                        int upperBound = list.size();
+                        if (upperBound == 0) {
+                            setEmptyDescription(mLinearPlanets);
+                        } else {
+                            for (int i = 0; i < upperBound; i++) {
+                                addPlanetsForId(list.get(i), mLinearPlanets);
+                            }
                         }
                     }
                 }));
@@ -134,8 +150,13 @@ public class DetailFilmFragment extends BaseDetailFragment {
                 .subscribe(new SimpleObserver<List<Integer>>() {
                     @Override
                     public void onNext(List<Integer> list) {
-                        for (int i = 0; i < list.size(); i++) {
-                            addStarshipsForId(list.get(i), mLinearStarships);
+                        int upperBound = list.size();
+                        if (upperBound == 0) {
+                            setEmptyDescription(mLinearStarships);
+                        } else {
+                            for (int i = 0; i < upperBound; i++) {
+                                addStarshipsForId(list.get(i), mLinearStarships);
+                            }
                         }
                     }
                 }));
@@ -147,8 +168,13 @@ public class DetailFilmFragment extends BaseDetailFragment {
                 .subscribe(new SimpleObserver<List<Integer>>() {
                     @Override
                     public void onNext(List<Integer> list) {
-                        for (int i = 0; i < list.size(); i++) {
-                            addVehiclesForId(list.get(i), mLinearVehicles);
+                        int upperBound = list.size();
+                        if (upperBound == 0) {
+                            setEmptyDescription(mLinearVehicles);
+                        } else {
+                            for (int i = 0; i < upperBound; i++) {
+                                addVehiclesForId(list.get(i), mLinearVehicles);
+                            }
                         }
                     }
                 }));

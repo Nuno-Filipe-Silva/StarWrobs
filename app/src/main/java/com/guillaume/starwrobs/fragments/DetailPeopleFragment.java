@@ -1,15 +1,14 @@
 package com.guillaume.starwrobs.fragments;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.guillaume.starwrobs.R;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.LinkTables;
 import com.guillaume.starwrobs.data.database.SWDatabaseContract.Tables;
 import com.guillaume.starwrobs.data.database.brite.PeopleBrite;
-import com.guillaume.starwrobs.data.database.brite.PlanetsBrite;
 import com.guillaume.starwrobs.data.database.brite.QueryLinkTables;
-import com.guillaume.starwrobs.data.database.brite.SimpleGenericObjectForRecyclerview;
 import com.guillaume.starwrobs.util.SimpleObserver;
 import com.guillaume.starwrobs.widget.DetailInfoLayout;
 
@@ -18,7 +17,6 @@ import java.util.List;
 import butterknife.Bind;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import timber.log.Timber;
 
 public class DetailPeopleFragment extends BaseDetailFragment {
 
@@ -66,8 +64,9 @@ public class DetailPeopleFragment extends BaseDetailFragment {
         return R.layout.detail_people;
     }
 
-    @Override public void onResume() {
-        super.onResume();
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         subscriptions.add(db.createQuery(Tables.PEOPLE, PeopleBrite.QUERY_GET_PEOPLE_FROM_ID, String.valueOf(objectId))
                 .map(PeopleBrite.MAP)
@@ -89,7 +88,7 @@ public class DetailPeopleFragment extends BaseDetailFragment {
                         mHairColor.setContentText(people.hairColor());
                         mSkinColor.setContentText(people.skinColor());
                         mGender.setContentText(people.gender());
-                        getHomeworld(people.homeworld());
+                        getHomeworld(people.homeworld(), mHomeworld);
                     }
                 }));
 
@@ -100,9 +99,14 @@ public class DetailPeopleFragment extends BaseDetailFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SimpleObserver<List<Integer>>() {
                     @Override
-                    public void onNext(List<Integer> listOfMovies) {
-                        for (int i = 0; i < listOfMovies.size(); i++) {
-                            addFilmsForId(listOfMovies.get(i), mLinearFilm);
+                    public void onNext(List<Integer> list) {
+                        int upperBound = list.size();
+                        if (upperBound == 0) {
+                            setEmptyDescription(mLinearFilm);
+                        } else {
+                            for (int i = 0; i < upperBound; i++) {
+                                addFilmsForId(list.get(i), mLinearFilm);
+                            }
                         }
                     }
                 }));
@@ -113,9 +117,14 @@ public class DetailPeopleFragment extends BaseDetailFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SimpleObserver<List<Integer>>() {
                     @Override
-                    public void onNext(List<Integer> species) {
-                        for (int i = 0; i < species.size(); i++) {
-                            addSpeciesForId(species.get(i), mLinearSpecies);
+                    public void onNext(List<Integer> list) {
+                        int upperBound = list.size();
+                        if (upperBound == 0) {
+                            setEmptyDescription(mLinearSpecies);
+                        } else {
+                            for (int i = 0; i < upperBound; i++) {
+                                addSpeciesForId(list.get(i), mLinearSpecies);
+                            }
                         }
                     }
                 }));
@@ -127,8 +136,13 @@ public class DetailPeopleFragment extends BaseDetailFragment {
                 .subscribe(new SimpleObserver<List<Integer>>() {
                     @Override
                     public void onNext(List<Integer> list) {
-                        for (int i = 0; i < list.size(); i++) {
-                            addStarshipsForId(list.get(i), mLinearStarships);
+                        int upperBound = list.size();
+                        if (upperBound == 0) {
+                            setEmptyDescription(mLinearStarships);
+                        } else {
+                            for (int i = 0; i < upperBound; i++) {
+                                addStarshipsForId(list.get(i), mLinearStarships);
+                            }
                         }
                     }
                 }));
@@ -140,23 +154,17 @@ public class DetailPeopleFragment extends BaseDetailFragment {
                 .subscribe(new SimpleObserver<List<Integer>>() {
                     @Override
                     public void onNext(List<Integer> list) {
-                        for (int i = 0; i < list.size(); i++) {
-                            addVehiclesForId(list.get(i), mLinearVehicles);
+                        int upperBound = list.size();
+                        if (upperBound == 0) {
+                            setEmptyDescription(mLinearVehicles);
+                        } else {
+                            for (int i = 0; i < upperBound; i++) {
+                                addVehiclesForId(list.get(i), mLinearVehicles);
+                            }
                         }
                     }
                 }));
     }
 
-    private void getHomeworld(int homeworldId) {
-        subscriptions.add(db.createQuery(Tables.PLANETS, PlanetsBrite.QUERY_PLANET_FROM_ID, String.valueOf(homeworldId))
-                .map(PlanetsBrite.MAP_STRING_UNIQUE)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SimpleObserver<SimpleGenericObjectForRecyclerview>() {
-                    @Override
-                    public void onNext(SimpleGenericObjectForRecyclerview planet) {
-                        mHomeworld.setContentText(planet.name);
-                    }
-                }));
-    }
+
 }

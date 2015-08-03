@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.guillaume.starwrobs.widget.DetailCardLayout
+        android:id="@+id/cardDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_major"
+        app:title="@string/ui_details_title">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/spacing_major"
+            android:paddingLeft="@dimen/spacing_major"
+            android:paddingRight="@dimen/spacing_major">
+
+            <com.guillaume.starwrobs.widget.DetailInfoLayout
+                android:id="@+id/layout_info_species_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                app:title="@string/ui_detail_species_name" />
+
+            <com.guillaume.starwrobs.widget.DetailInfoLayout
+                android:id="@+id/layout_info_species_classification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                app:title="@string/ui_detail_species_classification" />
+
+            <com.guillaume.starwrobs.widget.DetailInfoLayout
+                android:id="@+id/layout_info_species_designation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                app:title="@string/ui_detail_species_designation" />
+
+            <com.guillaume.starwrobs.widget.DetailInfoLayout
+                android:id="@+id/layout_info_species_average_height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                app:title="@string/ui_detail_species_average_height" />
+
+            <com.guillaume.starwrobs.widget.DetailInfoLayout
+                android:id="@+id/layout_info_species_skin_colors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                app:title="@string/ui_detail_species_skin_colors" />
+
+            <com.guillaume.starwrobs.widget.DetailInfoLayout
+                android:id="@+id/layout_info_species_hair_colors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                app:title="@string/ui_detail_species_hair_colors" />
+
+            <com.guillaume.starwrobs.widget.DetailInfoLayout
+                android:id="@+id/layout_info_species_eye_colors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                app:title="@string/ui_detail_species_eye_colors" />
+
+            <com.guillaume.starwrobs.widget.DetailInfoLayout
+                android:id="@+id/layout_info_species_average_lifespan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                app:title="@string/ui_detail_species_average_lifespan" />
+
+            <com.guillaume.starwrobs.widget.DetailInfoLayout
+                android:id="@+id/layout_info_species_homeworld"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                app:title="@string/ui_detail_species_homeworld" />
+
+            <com.guillaume.starwrobs.widget.DetailInfoLayout
+                android:id="@+id/layout_info_species_language"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_micro"
+                app:title="@string/ui_detail_species_language" />
+
+        </LinearLayout>
+
+    </com.guillaume.starwrobs.widget.DetailCardLayout>
+
+    <com.guillaume.starwrobs.widget.DetailCardLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_major"
+        app:title="@string/ui_card_people">
+
+        <LinearLayout
+            android:id="@+id/cardPeople"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/spacing_major"
+            android:paddingLeft="@dimen/spacing_major"
+            android:paddingRight="@dimen/spacing_major" />
+
+    </com.guillaume.starwrobs.widget.DetailCardLayout>
+
+    <com.guillaume.starwrobs.widget.DetailCardLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_major"
+        app:title="@string/ui_tab_films">
+
+        <LinearLayout
+
+            android:id="@+id/cardFilms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/spacing_major"
+            android:paddingLeft="@dimen/spacing_major"
+            android:paddingRight="@dimen/spacing_major" />
+
+    </com.guillaume.starwrobs.widget.DetailCardLayout>
+
+</LinearLayout>

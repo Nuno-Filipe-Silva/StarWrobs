@@ -67,8 +67,7 @@ public abstract class FilmsBrite {
                 List<SimpleGenericObjectForRecyclerview> values = new ArrayList<>(cursor.getCount());
                 while (cursor.moveToNext()) {
                     int objectId = Db.getInt(cursor, CommonColumns.COMMON_ID);
-                    String title = Db.getString(cursor, Film.FILM_TITLE)
-                                + " (ep " + Db.getInt(cursor, Film.FILM_EPISODE_ID) + ")";
+                    String title = Db.getString(cursor, Film.FILM_TITLE);
 
                     values.add(new SimpleGenericObjectForRecyclerview(objectId, SWListFragment.KEY_FILMS, title));
                 }

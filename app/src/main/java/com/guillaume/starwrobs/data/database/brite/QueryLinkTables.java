@@ -167,7 +167,7 @@ public class QueryLinkTables {
     public static final String QUERY_LINK_PEOPLE_STARSHIPS_GET_PEOPLE_FOR_STARSHIPS_ID = "SELECT * FROM "
             + LinkTables.LINK_PEOPLE_STARSHIPS
             + " WHERE "
-            + SimpleIds.PEOPLE_ID
+            + SimpleIds.STARSHIPS_ID
             + " = ?";
 
     /**

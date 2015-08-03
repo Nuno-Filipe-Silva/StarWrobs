@@ -1,6 +1,7 @@
 package com.guillaume.starwrobs.fragments;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -65,8 +66,8 @@ public class DetailPlanetsFragment extends BaseDetailFragment {
 
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         subscriptions.add(db.createQuery(Tables.PLANETS, PlanetsBrite.QUERY_PLANET_FROM_ID, String.valueOf(objectId))
                 .map(PlanetsBrite.MAP)
@@ -96,8 +97,13 @@ public class DetailPlanetsFragment extends BaseDetailFragment {
                 .subscribe(new SimpleObserver<List<Integer>>() {
                     @Override
                     public void onNext(List<Integer> list) {
-                        for (int i = 0; i < list.size(); i++) {
-                            addPeopleForId(list.get(i), mLinearResidents);
+                        int upperBound = list.size();
+                        if (upperBound == 0) {
+                            setEmptyDescription(mLinearResidents);
+                        } else {
+                            for (int i = 0; i < upperBound; i++) {
+                                addPeopleForId(list.get(i), mLinearResidents);
+                            }
                         }
                     }
                 }));
@@ -109,8 +115,13 @@ public class DetailPlanetsFragment extends BaseDetailFragment {
                 .subscribe(new SimpleObserver<List<Integer>>() {
                     @Override
                     public void onNext(List<Integer> list) {
-                        for (int i = 0; i < list.size(); i++) {
-                            addFilmsForId(list.get(i), mLinearFilms);
+                        int upperBound = list.size();
+                        if (upperBound == 0) {
+                            setEmptyDescription(mLinearFilms);
+                        } else {
+                            for (int i = 0; i < upperBound; i++) {
+                                addFilmsForId(list.get(i), mLinearFilms);
+                            }
                         }
                     }
                 }));

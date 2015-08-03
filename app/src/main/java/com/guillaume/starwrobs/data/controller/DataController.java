@@ -357,7 +357,9 @@ public class DataController {
         values.put(SWDatabaseContract.Species.SPECIES_HAIR_COLORS, species.hair_colors);
         values.put(SWDatabaseContract.Species.SPECIES_EYE_COLORS, species.eye_colors);
         values.put(SWDatabaseContract.Species.SPECIES_AVERAGE_LIFESPAN, species.average_lifespan);
-        values.put(SWDatabaseContract.Species.SPECIES_HOMEWORLD, species.homeworld);
+        if(species.homeworld != null) {
+            values.put(SWDatabaseContract.Species.SPECIES_HOMEWORLD, SWFunctions.getIdFromUrl(species.homeworld));
+        }
         values.put(SWDatabaseContract.Species.SPECIES_LANGUAGE, species.language);
         mDatabase.insert(Tables.SPECIES, values);
     }
