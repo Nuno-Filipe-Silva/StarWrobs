@@ -17,9 +17,9 @@ Libraries
  
 Screenshots
 ---------
-![Master](http://i.imgur.com/Tww1TcB.png)
-![Detail](http://i.imgur.com/H0ZlMEl.png)
-<img src="http://i.imgur.com/H0ZlMEl.png" width="48">
+
+<img src="http://i.imgur.com/Tww1TcB.png" width="500">
+<img src="http://i.imgur.com/H0ZlMEl.png" width="500">
 
 ## License
 
