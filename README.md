@@ -1,5 +1,19 @@
 # StarWrobs
-Sample app to play with http://swapi.co/ API
+A sample Android app to play with http://swapi.co/ API.
+
+Be prepared for `The force Awakens` by learning everything about Star Wars characters, movies, planets, species, starships and vehicles.
+
+Libraries
+---------
+
+ * Dagger 2 - https://google.github.io/dagger/
+ * ButterKnife - https://jakewharton.github.io/butterknife
+ * Retrofit - https://square.github.io/retrofit
+ * OkHttp - https://square.github.io/okhttp
+ * RxJava - https://github.com/ReactiveX/RxJava
+ * Timber - https://github.com/JakeWharton/timber
+ * AutoParcel - https://github.com/frankiesardo/auto-parcel
+ * SQLBrite - https://github.com/square/sqlbrite
 
 ## License
 
