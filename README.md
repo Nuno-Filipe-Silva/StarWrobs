@@ -14,6 +14,12 @@ Libraries
  * Timber - https://github.com/JakeWharton/timber
  * AutoParcel - https://github.com/frankiesardo/auto-parcel
  * SQLBrite - https://github.com/square/sqlbrite
+ * 
+ 
+Screenshots
+---------
+![Master](http://i.imgur.com/Tww1TcB.png)
+![Detail](http://i.imgur.com/H0ZlMEl.png)
 
 ## License
 
